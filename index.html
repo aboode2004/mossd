@@ -3,672 +3,610 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مصمم أغلفة التقارير والأبحاث الأكاديمية الشامل (50 قالب، 50 خط، 50 رمز)</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for 50+ rich font selection -->
+    <title>استوديو تصميم أغطية التقارير الاحترافي</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;600;700;900&family=Changa:wght@400;600;800&family=El+Messiri:wght@400;600;700&family=Lateef&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Readex+Pro:wght@300;400;600&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&family=Noto+Naskh+Arabic:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;700&family=Open+Sans:wght@300;400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&family=Aref+Ruqaa:wght@400;700&family=Katibeh&family=Harmattan:wght@400;700&family=Rakkas&family=Alexandria:wght@300;400;600;700&family=Almarai:wght@300;400;700&family=Markazi+Text:wght@400;600&family=Zain:wght@300;400;700&family=Lemonada:wght@300;500;700&family=Vibes&family=Lalezar&family=Mirza:wght@400;700&family=Kufam:wght@400;600&family=Beiruti:wght@300;500;700&family=Jomhuria&family=Marhey:wght@400;700&family=Ruwudu:wght@400;600&family=Scheherazade+New:wght@400;700&family=Are+You+Serious&family=Noto+Serif+Arabic:wght@300;600&family=Readex+Pro:wght@300;500&family=Plus+Jakarta+Sans:wght@400;700&family=Space+Grotesk:wght@400;700&family=Outfit:wght@400;700&family=Inter:wght@300;400;600;700&family=Lato:wght@300;400;700&family=Poppins:wght@300;400;600;700&family=Merriweather:wght@300;400;700&family=Cairo+Play:wght@400;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&family=Changa:wght@300;500;700&family=El+Messiri:wght@400;600;700&family=Tajawal:wght@300;400;700;900&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;700&family=Lateef&family=Harmattan:wght@400;700&family=Readex+Pro:wght@300;500;700&family=Almarai:wght@300;400;700&family=Markazi+Text:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&family=Lemonada:wght@300;500;700&family=Mirza:wght@400;600;700&family=Aref+Ruqaa:wght@400;700&family=Katibeh&family=Rakkas&family=Amiri+Quran&family=Uthmanic+Hafs&family=Noto+Serif+Arabic:wght@400;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700&family=Zain:wght@300;400;700&family=Baloo+Bhaijaan+2:wght@400;600;700&family=Lalezar&family=Alex+Brush&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&family=Poppins:wght@300;400;700&family=Oswald:wght@400;700&family=Merriweather:wght@400;700&family=Lora:wght@400;700&family=Cairo+Play:wght@400;700&family=Marhey:wght@400;700&family=Mada:wght@300;400;700&family=Vibes&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- html2pdf library for PDF export -->
+    <!-- html2pdf & html2canvas & docx libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
     <style>
-        @media print {
-            body {
-                background: white !important;
-                padding: 0 !important;
-                margin: 0 !important;
-            }
-            .no-print {
-                display: none !important;
-            }
-            .print-container {
-                box-shadow: none !important;
-                margin: 0 !important;
-                width: 100% !important;
-                height: 100% !important;
-                border: none !important;
-            }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
         }
-        
-        /* Custom Scrollbars */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #f1f5f9;
+            background: #1e293b;
         }
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
+            background: #475569;
+            border-radius: 3px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+            background: #64748b;
         }
 
-        .cover-preview-page {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transition: all 0.3s ease;
+        /* تحسين معاينة الغلاف ودعم التصميم المتجاوب للهواتف */
+        .preview-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #report-cover {
+            width: 794px;
+            height: 1123px;
+            background-color: white;
+            color: #0f172a;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-sizing: border-box;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        @media (max-width: 860px) {
+            .preview-container {
+                height: 720px; /* تقليص الحجم الاحتياطي لمنع الفراغات الكبيرة */
+            }
+            #report-cover {
+                transform: scale(0.68);
+                margin-top: -170px;
+                margin-bottom: -170px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .preview-container {
+                height: 540px;
+            }
+            #report-cover {
+                transform: scale(0.50);
+                margin-top: -270px;
+                margin-bottom: -270px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .preview-container {
+                height: 440px;
+            }
+            #report-cover {
+                transform: scale(0.40);
+                margin-top: -330px;
+                margin-bottom: -330px;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-['Cairo',sans-serif] min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
 
-    <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50 no-print">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-            <!-- Brand -->
-            <div class="flex items-center space-x-3 space-x-reverse">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                    <i class="fa-solid fa-graduation-cap text-white text-lg"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-lg text-white leading-tight">صانع أغلفة التقارير</h1>
-                    <p class="text-xs text-slate-400">إصدار الـ 50 إطاراً وخطاً ورمزاً</p>
-                </div>
+    <!-- Top Navigation Bar -->
+    <header class="bg-slate-900 border-b border-slate-800 shadow-lg px-4 sm:px-6 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-bold text-xl shadow-md shrink-0">
+                <i class="fa-solid fa-file-shield"></i>
             </div>
+            <div>
+                <h1 class="text-base sm:text-lg font-bold text-slate-100">استوديو تصميم أغطية التقارير</h1>
+                <p class="text-[11px] sm:text-xs text-slate-400">نظام متكامل لتصميم وتصدير غلاف التقارير الأكاديمية</p>
+            </div>
+        </div>
 
-            <!-- 6 Control Sections Navigation Buttons -->
-            <div class="flex items-center gap-2 overflow-x-auto py-1 max-w-full">
-                <button onclick="switchTab('paper')" id="btn-tab-paper" class="px-3 py-2 rounded-lg text-xs font-semibold bg-indigo-600 text-white flex items-center gap-1.5 transition shadow-sm whitespace-nowrap">
-                    <i class="fa-solid fa-file-lines"></i> حجم الورق والشعارات
-                </button>
-                <button onclick="switchTab('templates')" id="btn-tab-templates" class="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition whitespace-nowrap">
-                    <i class="fa-solid fa-palette"></i> الإطارات (50)
-                </button>
-                <button onclick="switchTab('fonts')" id="btn-tab-fonts" class="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition whitespace-nowrap">
-                    <i class="fa-solid fa-font"></i> الخطوط (50)
-                </button>
-                <button onclick="switchTab('symbols')" id="btn-tab-symbols" class="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition whitespace-nowrap">
-                    <i class="fa-solid fa-icons"></i> الرموز والعبارات (50)
-                </button>
-                <button onclick="switchTab('styles')" id="btn-tab-styles" class="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition whitespace-nowrap">
-                    <i class="fa-solid fa-sliders"></i> الألوان وحجم الخط
-                </button>
-                <button onclick="switchTab('export')" id="btn-tab-export" class="px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition whitespace-nowrap">
-                    <i class="fa-solid fa-download"></i> التصدير والطباعة
-                </button>
-            </div>
+        <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <button onclick="exportPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-file-pdf"></i> PDF
+            </button>
+            <button onclick="exportWord()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-file-word"></i> Word
+            </button>
+            <button onclick="printReport()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-print"></i> طباعة
+            </button>
         </div>
     </header>
 
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- Main Container: Side-by-Side Grid -->
+    <main class="flex-1 p-3 sm:p-4 lg:p-6 grid grid-cols-1 xl:grid-cols-12 gap-6 max-w-[1700px] mx-auto w-full">
 
-        <!-- LEFT/SIDEBAR CONTROLS PANEL (5 Columns) -->
-        <div class="lg:col-span-5 bg-slate-950/80 backdrop-blur border border-slate-800 rounded-2xl p-5 flex flex-col gap-6 no-print max-h-[85vh] overflow-y-auto">
-            
-            <!-- SECTION 1: PAPER SIZE & DUAL LOGOS PANEL -->
-            <div id="panel-paper" class="control-panel space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h2 class="font-bold text-base text-indigo-400 flex items-center gap-2">
-                        <i class="fa-solid fa-file-lines"></i> 1. حجم الورق والشعارات المزدوجة
-                    </h2>
-                    <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">أساسي</span>
+        <!-- Controls Section -->
+        <div class="xl:col-span-5 bg-slate-900/95 backdrop-blur border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col gap-5 h-auto xl:h-[84vh] overflow-y-auto">
+            <div class="border-b border-slate-800 pb-3">
+                <h2 class="text-md font-bold text-emerald-400 flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i> لوحة التحكم والأقسام
+                </h2>
+                <p class="text-xs text-slate-400">تحكم كامل في الخطوط، الإطارات، الشعارات، الألوان والمحتوى</p>
+            </div>
+
+            <!-- 1. Text Content Section -->
+            <div class="space-y-3 bg-slate-800/50 p-3 sm:p-4 rounded-xl border border-slate-800">
+                <h3 class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                    <i class="fa-solid fa-pen-nib text-emerald-500"></i> بيانات التقرير والعناوين
+                </h3>
+                <div class="grid grid-cols-1 gap-3">
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">اسم المؤسسة / الجامعة</label>
+                        <input type="text" id="input-university" value="الجامعة التقنية الشمالية" oninput="updateText('university')" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">الكلية / المعهد / القسم</label>
+                        <input type="text" id="input-college" value="معهد الإدارة التقني نينوى - قسم الإدارة القانونية" oninput="updateText('college')" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">عنوان التقرير الرئيسي</label>
+                        <input type="text" id="input-title" value="المذاهب الفكرية في الالتزام وأثرها في القوانين" oninput="updateText('title')" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
                 </div>
-                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">إعداد الطالب / الباحث</label>
+                        <input type="text" id="input-author" value="عبدالرحمن وليد هاشم احمد" oninput="updateText('author')" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">إشراف الأستاذ</label>
+                        <input type="text" id="input-supervisor" value="أ.م. الدكتور / مشرف المادة" oninput="updateText('supervisor')" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">العام الدراسي</label>
+                        <input type="text" id="input-year" value="2025 - 2026 م" oninput="updateText('year')" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">التاريخ الهجري / الميلادي</label>
+                        <input type="text" id="input-date" value="ربيع الآخر 1447 هـ" oninput="updateText('date')" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Fonts Section (40 Fonts) -->
+            <div class="space-y-3 bg-slate-800/50 p-3 sm:p-4 rounded-xl border border-slate-800">
+                <h3 class="text-sm font-semibold text-slate-200 flex items-center justify-between">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-font text-emerald-500"></i> قسم الخطوط (40 خطاً)</span>
+                    <span class="text-xs bg-emerald-900/60 text-emerald-300 px-2 py-0.5 rounded-full">نشط</span>
+                </h3>
+                <select id="font-family-select" onchange="changeFont(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    <option value="'Cairo', sans-serif">Cairo (عربي عصري)</option>
+                    <option value="'Amiri', serif">Amiri (أميري كلاسيكي)</option>
+                    <option value="'Tajawal', sans-serif">Tajawal (تجوال مهني)</option>
+                    <option value="'Changa', sans-serif">Changa (شانجا بارز)</option>
+                    <option value="'El Messiri', sans-serif">El Messiri (المسيري عربي دافئ)</option>
+                    <option value="'Reem Kufi', sans-serif">Reem Kufi (خط الكوفي)</option>
+                    <option value="'Scheherazade New', serif">Scheherazade New (شهرزاد قرآني)</option>
+                    <option value="'Lateef', serif">Lateef (لطيف انسيابي)</option>
+                    <option value="'Harmattan', serif">Harmattan (هرمتان)</option>
+                    <option value="'Readex Pro', sans-serif">Readex Pro (ريديكس)</option>
+                    <option value="'Almarai', sans-serif">Almarai (المراعي)</option>
+                    <option value="'Markazi Text', serif">Markazi Text (مركزي)</option>
+                    <option value="'IBM Plex Sans Arabic', sans-serif">IBM Plex Sans (آي بي إم)</option>
+                    <option value="'Lemonada', cursive">Lemonada (ليمونادا)</option>
+                    <option value="'Mirza', cursive">Mirza (ميرزا)</option>
+                    <option value="'Aref Ruqaa', serif">Aref Ruqaa (خط الرقعة)</option>
+                    <option value="'Katibeh', serif">Katibeh (الكاتب)</option>
+                    <option value="'Rakkas', cursive">Rakkas (رقاص زخرفي)</option>
+                    <option value="'Amiri Quran', serif">Amiri Quran (أميري قرآن)</option>
+                    <option value="'Uthmanic Hafs', serif">Uthmanic Hafs (حفص عثماني)</option>
+                    <option value="'Noto Serif Arabic', serif">Noto Serif Arabic</option>
+                    <option value="'Noto Sans Arabic', sans-serif">Noto Sans Arabic</option>
+                    <option value="'Zain', sans-serif">Zain (زين)</option>
+                    <option value="'Baloo Bhaijaan 2', cursive">Baloo Bhaijaan 2</option>
+                    <option value="'Lalezar', cursive">Lalezar (لاله زار)</option>
+                    <option value="'Alex Brush', cursive">Alex Brush (إنجليزي زخرفي)</option>
+                    <option value="'Cinzel', serif">Cinzel (سينزيل فاخر)</option>
+                    <option value="'Montserrat', sans-serif">Montserrat (مونتسيرات)</option>
+                    <option value="'Playfair Display', serif">Playfair Display</option>
+                    <option value="'Roboto', sans-serif">Roboto</option>
+                    <option value="'Poppins', sans-serif">Poppins</option>
+                    <option value="'Oswald', sans-serif">Oswald</option>
+                    <option value="'Merriweather', serif">Merriweather</option>
+                    <option value="'Lora', serif">Lora</option>
+                    <option value="'Cairo Play', sans-serif">Cairo Play</option>
+                    <option value="'Marhey', cursive">Marhey</option>
+                    <option value="'Mada', sans-serif">Mada</option>
+                    <option value="'Vibes', cursive">Vibes</option>
+                    <option value="'Great Vibes', cursive">Great Vibes</option>
+                </select>
+                <div class="flex items-center gap-3">
+                    <label class="text-xs text-slate-400">حجم الخط الرئيسي:</label>
+                    <input type="range" min="20" max="48" value="32" oninput="changeFontSize(this.value)" class="flex-1 accent-emerald-500 cursor-pointer">
+                </div>
+            </div>
+
+            <!-- 3. Frames Section (40 Frames) -->
+            <div class="space-y-3 bg-slate-800/50 p-3 sm:p-4 rounded-xl border border-slate-800">
+                <h3 class="text-sm font-semibold text-slate-200 flex items-center justify-between">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-border-all text-emerald-500"></i> قسم الإطارات (40 إطاراً)</span>
+                </h3>
+                <select id="frame-select" onchange="changeFrame(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-emerald-500">
+                    <option value="border-4 border-double border-emerald-600 p-4">إطار ذهبي/زمردي مزدوج فاخر</option>
+                    <option value="border-8 border-solid border-slate-700 p-4 outline outline-2 outline-emerald-500 outline-offset-[-10px]">إطار ملكي عريض مزدوج</option>
+                    <option value="border-2 border-dashed border-emerald-500 p-4">إطار منقط هندسي رفيع</option>
+                    <option value="border-4 border-ridge border-amber-500 p-4">إطار نافر بارز (Ridge)</option>
+                    <option value="border-4 border-inset border-slate-400 p-4">إطار غائر (Inset)</option>
+                    <option value="border-4 border-groove border-emerald-700 p-4">إطار محفور (Groove)</option>
+                    <option value="border-4 border-solid border-amber-600 p-4">إطار ذهبي صلب</option>
+                    <option value="border-8 border-double border-blue-600 p-4">إطار أزرق ملكي مزدوج</option>
+                    <option value="border-2 border-dotted border-slate-300 p-4">إطار منقط خفيف</option>
+                    <option value="border-4 border-solid border-purple-600 p-4">إطار أرجواني فاخر</option>
+                    <option value="border-2 border-solid border-emerald-800 p-2">إطار بسيط رفيع</option>
+                    <option value="border-6 border-double border-slate-500 p-4">إطار رمادي كلاسيكي مزدوج</option>
+                    <option value="border-4 border-dashed border-blue-400 p-4">إطار شرطات أزرق</option>
+                    <option value="border-5 border-solid border-red-800 p-4">إطار أحمر داكن رسمي</option>
+                    <option value="border-4 border-ridge border-teal-600 p-4">إطار فيروزي بارز</option>
+                    <option value="border-3 border-solid border-cyan-500 p-4">إطار سماوي متوهج</option>
+                    <option value="border-4 border-double border-indigo-600 p-4">إطار نيلي مزدوج</option>
+                    <option value="border-8 border-ridge border-amber-700 p-4">إطار نحاسي عريض</option>
+                    <option value="border-2 border-solid border-emerald-400 p-4 outline outline-1 outline-emerald-700 outline-offset-[-6px]">إطار متداخل حديث</option>
+                    <option value="border-4 border-solid border-emerald-500 p-6 shadow-2xl">إطار بظلال عميقة</option>
+                    <option value="border-4 border-dashed border-amber-400 p-4">إطار ذهبي منقط</option>
+                    <option value="border-3 border-double border-rose-600 p-4">إطار وردي رسمي</option>
+                    <option value="border-4 border-solid border-zinc-700 p-4">إطار فحمي أنيق</option>
+                    <option value="border-5 border-groove border-amber-500 p-4">إطار ذهبي محفور</option>
+                    <option value="border-4 border-inset border-emerald-600 p-4">إطار زمردي غائر</option>
+                    <option value="border-2 border-solid border-emerald-600 p-8">إطار بهامش واسع جداً</option>
+                    <option value="border-6 border-solid border-slate-800 p-4">إطار أسود فاحم</option>
+                    <option value="border-4 border-double border-emerald-500 p-4">إطار زمردي ناصع</option>
+                    <option value="border-3 border-dashed border-emerald-300 p-4">إطار فاتح رقيق</option>
+                    <option value="border-4 border-ridge border-slate-600 p-4">إطار رمادي نافر</option>
+                    <option value="border-4 border-solid border-amber-700 p-4">إطار برونزي عتيق</option>
+                    <option value="border-2 border-double border-cyan-600 p-4">إطار سيان مزدوج</option>
+                    <option value="border-4 border-solid border-teal-800 p-4">إطار أخضر بترولي</option>
+                    <option value="border-5 border-dashed border-indigo-500 p-4">إطار شرطات نيلي</option>
+                    <option value="border-4 border-groove border-purple-700 p-4">إطار أرجواني محفور</option>
+                    <option value="border-3 border-solid border-emerald-500 p-2 outline outline-2 outline-slate-800 outline-offset-[-4px]">إطار ثنائي الطبقات</option>
+                    <option value="border-4 border-double border-amber-600 p-4">إطار ذهبي ملكي مزدوج</option>
+                    <option value="border-4 border-solid border-emerald-600 p-3">إطار هندسي متناسق</option>
+                    <option value="border-6 border-ridge border-emerald-700 p-4">إطار زمردي بارز ثقيل</option>
+                    <option value="border-2 border-solid border-emerald-500 p-4 shadow-inner">إطار داخلي مضغوط</option>
+                </select>
+            </div>
+
+            <!-- 4. Colors Section -->
+            <div class="space-y-3 bg-slate-800/50 p-3 sm:p-4 rounded-xl border border-slate-800">
+                <h3 class="text-sm font-semibold text-slate-200 flex items-center justify-between">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-palette text-emerald-500"></i> قسم تدرج الألوان والألوان</span>
+                    <span class="text-xs bg-emerald-900/60 text-emerald-300 px-2 py-0.5 rounded-full">نشط</span>
+                </h3>
                 <div class="grid grid-cols-2 gap-3">
-                    <label class="cursor-pointer border border-slate-800 bg-slate-900/50 p-3 rounded-xl hover:border-indigo-500 transition flex flex-col items-center text-center gap-2">
-                        <input type="radio" name="paperSize" value="A4-portrait" checked onchange="updatePaperSize()" class="accent-indigo-500">
-                        <span class="text-xs font-bold text-slate-200">A4 عمودي</span>
-                        <span class="text-[10px] text-slate-400">210 × 297 مم</span>
-                    </label>
-                    <label class="cursor-pointer border border-slate-800 bg-slate-900/50 p-3 rounded-xl hover:border-indigo-500 transition flex flex-col items-center text-center gap-2">
-                        <input type="radio" name="paperSize" value="A4-landscape" onchange="updatePaperSize()" class="accent-indigo-500">
-                        <span class="text-xs font-bold text-slate-200">A4 أفقي</span>
-                        <span class="text-[10px] text-slate-400">297 × 210 مم</span>
-                    </label>
-                    <label class="cursor-pointer border border-slate-800 bg-slate-900/50 p-3 rounded-xl hover:border-indigo-500 transition flex flex-col items-center text-center gap-2">
-                        <input type="radio" name="paperSize" value="A3" onchange="updatePaperSize()" class="accent-indigo-500">
-                        <span class="text-xs font-bold text-slate-200">حجم A3 الكبير</span>
-                        <span class="text-[10px] text-slate-400">مخصص للوحات</span>
-                    </label>
-                    <label class="cursor-pointer border border-slate-800 bg-slate-900/50 p-3 rounded-xl hover:border-indigo-500 transition flex flex-col items-center text-center gap-2">
-                        <input type="radio" name="paperSize" value="Letter" onchange="updatePaperSize()" class="accent-indigo-500">
-                        <span class="text-xs font-bold text-slate-200">Letter أمريكي</span>
-                        <span class="text-[10px] text-slate-400">8.5 × 11 إنش</span>
-                    </label>
-                </div>
-
-                <div class="mt-4 pt-4 border-t border-slate-800/80 space-y-3">
-                    <h3 class="text-xs font-semibold text-slate-300">الشعارات المزدوجة (يمين ويسار):</h3>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="text-[11px] text-slate-400 block mb-1">شعار الجهة اليمنى</label>
-                            <input type="file" id="logo-right-file" accept="image/*" onchange="loadLogo(event, 'right')" class="w-full text-xs text-slate-400 file:mr-1 file:py-1.5 file:px-2.5 file:rounded-lg file:border-0 file:text-[10px] file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer">
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">لون العناوين والنصوص:</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" id="text-color-picker" value="#0f172a" oninput="changeTextColor(this.value)" class="w-10 h-9 rounded bg-slate-900 border border-slate-700 cursor-pointer">
+                            <span class="text-xs text-slate-300">اختر اللون</span>
                         </div>
-                        <div>
-                            <label class="text-[11px] text-slate-400 block mb-1">شعار الجهة اليسرى</label>
-                            <input type="file" id="logo-left-file" accept="image/*" onchange="loadLogo(event, 'left')" class="w-full text-xs text-slate-400 file:mr-1 file:py-1.5 file:px-2.5 file:rounded-lg file:border-0 file:text-[10px] file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-700 cursor-pointer">
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-400 block mb-1">لون الخلفية الداخلي:</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" id="bg-color-picker" value="#ffffff" oninput="changeBgColor(this.value)" class="w-10 h-9 rounded bg-slate-900 border border-slate-700 cursor-pointer">
+                            <span class="text-xs text-slate-300">اختر الخلفية</span>
                         </div>
                     </div>
                 </div>
+                <div>
+                    <label class="text-xs text-slate-400 block mb-1">أنماط وتدرجات جاهزة:</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button onclick="setGradient('bg-white')" class="h-8 rounded bg-white border border-slate-700 shadow cursor-pointer text-xs text-slate-800 font-semibold">أبيض ناصع</button>
+                        <button onclick="setGradient('bg-gradient-to-br from-amber-50 via-white to-amber-100')" class="h-8 rounded bg-amber-100 border border-amber-300 shadow cursor-pointer text-xs text-amber-900 font-semibold">خلفية ذهبية</button>
+                        <button onclick="setGradient('bg-gradient-to-br from-emerald-50 via-white to-teal-50')" class="h-8 rounded bg-emerald-100 border border-emerald-300 shadow cursor-pointer text-xs text-emerald-900 font-semibold">خلفية زمردية</button>
+                        <button onclick="setGradient('bg-gradient-to-br from-slate-100 via-white to-slate-200')" class="h-8 rounded bg-slate-200 border border-slate-400 shadow cursor-pointer text-xs text-slate-900 font-semibold">فحمي فاتح</button>
+                    </div>
+                </div>
+            </div>
 
-                <div class="mt-2 space-y-3">
-                    <h3 class="text-xs font-semibold text-slate-300">معلومات التقرير الأساسية:</h3>
+            <!-- 5. Logos Section & Size Control -->
+            <div class="space-y-3 bg-slate-800/50 p-3 sm:p-4 rounded-xl border border-slate-800">
+                <h3 class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-emerald-500"></i> قسم الشعارات وحجمها (يمين ويسار)
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="text-[11px] text-slate-400 block mb-1">الجامعة / المؤسسة</label>
-                        <input type="text" id="input-university" value="الجامعة الإسلامية / جامعة بغداد" oninput="liveUpdate()" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <label class="text-xs text-slate-400 block mb-1">شعار اليمين (رفع):</label>
+                        <input type="file" accept="image/*" onchange="uploadLogo(event, 'right')" class="w-full text-xs text-slate-400 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:bg-emerald-700 file:text-white hover:file:bg-emerald-600 cursor-pointer">
                     </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="text-[11px] text-slate-400 block mb-1">الكلية</label>
-                            <input type="text" id="input-college" value="كلية الهندسة وتكنولوجيا المعلومات" oninput="liveUpdate()" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
-                        </div>
-                        <div>
-                            <label class="text-[11px] text-slate-400 block mb-1">القسم</label>
-                            <input type="text" id="input-department" value="قسم هندسة الحاسوب والذكاء الاصطناعي" oninput="liveUpdate()" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 2: TEMPLATES PANEL (50 Templates) -->
-            <div id="panel-templates" class="control-panel hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h2 class="font-bold text-base text-indigo-400 flex items-center gap-2">
-                        <i class="fa-solid fa-palette"></i> 2. قوالب الإطارات (50 قالب فريد)
-                    </h2>
-                    <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">50 تصميماً</span>
-                </div>
-                <p class="text-xs text-slate-400">اختر من بين 50 إطاراً أكاديمياً ورسمياً:</p>
-                
-                <div id="templates-grid" class="grid grid-cols-2 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
-                    <!-- Populated dynamically via JS to ensure exactly 50 templates -->
-                </div>
-            </div>
-
-            <!-- SECTION 3: FONTS PANEL (50 Fonts) -->
-            <div id="panel-fonts" class="control-panel hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h2 class="font-bold text-base text-indigo-400 flex items-center gap-2">
-                        <i class="fa-solid fa-font"></i> 3. مكتبة الخطوط (50 خطاً عالمياً وعربياً)
-                    </h2>
-                    <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">50 خطاً</span>
-                </div>
-                <p class="text-xs text-slate-400">اختر خطاً من بين 50 خطاً مختلفاً:</p>
-                
-                <div class="space-y-3">
-                    <select id="font-family-select" onchange="changeFontFamily(this.value)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
-                        <!-- Populated dynamically via JS to ensure exactly 50 fonts -->
-                    </select>
-
-                    <div class="grid grid-cols-2 gap-2 max-h-[280px] overflow-y-auto pr-1" id="font-quick-buttons">
-                        <!-- Quick selector buttons for popular fonts -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 4: SYMBOLS & PHRASES PANEL (50 Symbols/Phrases) -->
-            <div id="panel-symbols" class="control-panel hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h2 class="font-bold text-base text-indigo-400 flex items-center gap-2">
-                        <i class="fa-solid fa-icons"></i> 4. الرموز والعبارات (50 رمزاً وعبارة)
-                    </h2>
-                    <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">50 عنصراً</span>
-                </div>
-                <p class="text-xs text-slate-400">انقر على أي رمز أو عبارة لإضافتها فوراً:</p>
-
-                <div id="symbols-container" class="grid grid-cols-2 gap-2 max-h-[350px] overflow-y-auto pr-1">
-                    <!-- Populated dynamically via JS to ensure exactly 50 symbols -->
-                </div>
-            </div>
-
-            <!-- SECTION 5: COLORS & TYPOGRAPHY SIZES PANEL -->
-            <div id="panel-styles" class="control-panel hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h2 class="font-bold text-base text-indigo-400 flex items-center gap-2">
-                        <i class="fa-solid fa-sliders"></i> 5. الألوان وأحجام الخطوط
-                    </h2>
-                    <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">تخصيص المظهر</span>
-                </div>
-                
-                <div class="space-y-4">
                     <div>
-                        <label class="text-xs text-slate-300 block mb-1">حجم خط العنوان الرئيسي</label>
-                        <select id="title-size-select" onchange="changeTitleSize(this.value)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200">
-                            <option value="text-xl">صغير (xl)</option>
-                            <option value="text-2xl">متوسط (2xl)</option>
-                            <option value="text-3xl" selected>كبير (3xl)</option>
-                            <option value="text-4xl">كبير جداً (4xl)</option>
-                            <option value="text-5xl">ضخم بارز (5xl)</option>
-                        </select>
+                        <label class="text-xs text-slate-400 block mb-1">شعار اليسار (رفع):</label>
+                        <input type="file" accept="image/*" onchange="uploadLogo(event, 'left')" class="w-full text-xs text-slate-400 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:bg-emerald-700 file:text-white hover:file:bg-emerald-600 cursor-pointer">
                     </div>
-
-                    <div>
-                        <label class="text-xs text-slate-300 block mb-1">لون خطوط الغلاف</label>
-                        <select id="text-color-select" onchange="changeTextColor(this.value)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200">
-                            <option value="text-slate-900">أسود فاحم كلاسيكي</option>
-                            <option value="text-slate-800">رمادي داكن رسمي</option>
-                            <option value="text-blue-950" selected>أزرق ملكي داكن</option>
-                            <option value="text-indigo-950">أزرق نيلي عميق</option>
-                            <option value="text-emerald-950">أخضر زمردي</option>
-                            <option value="text-amber-950">بني عتيق</option>
-                            <option value="text-rose-950">أحمر داكن رسمي</option>
-                            <option value="text-purple-950">بنفسجي ملكي</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="text-xs text-slate-300 block mb-1">لون خلفية الغلاف</label>
-                        <select id="bg-color-select" onchange="changeBgColor(this.value)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200">
-                            <option value="bg-white" selected>أبيض ناصع نقي</option>
-                            <option value="bg-amber-50/40">كريمي عتيق خفيف</option>
-                            <option value="bg-slate-50">رمادي فاتح هادئ</option>
-                            <option value="bg-blue-50/30">أزرق فاتح باهت</option>
-                            <option value="bg-emerald-50/30">أخضر فاتح باهت</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="flex items-center gap-4 mt-2 flex-wrap">
+                    <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                        <input type="checkbox" id="toggle-logo-right" checked onchange="toggleLogo('right', this.checked)" class="accent-emerald-500"> إظهار اليمين
+                    </label>
+                    <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                        <input type="checkbox" id="toggle-logo-left" checked onchange="toggleLogo('left', this.checked)" class="accent-emerald-500"> إظهار اليسار
+                    </label>
+                </div>
+                <div class="flex items-center gap-3 pt-2">
+                    <label class="text-xs text-slate-400 shrink-0">حجم الشعارات:</label>
+                    <input type="range" min="40" max="140" value="96" oninput="changeLogoSize(this.value)" class="flex-1 accent-emerald-500 cursor-pointer">
                 </div>
             </div>
 
-            <!-- SECTION 6: EXPORT & PRINT PANEL -->
-            <div id="panel-export" class="control-panel hidden space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h2 class="font-bold text-base text-indigo-400 flex items-center gap-2">
-                        <i class="fa-solid fa-download"></i> 6. التصدير والطباعة الاحترافية
-                    </h2>
-                    <span class="text-xs bg-indigo-500/10 text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-500/20">جاهز للتصدير</span>
-                </div>
-                
-                <p class="text-xs text-slate-400">احفظ غلاف تقريرك الأكاديمي بجودة عالية بصيغة PDF أو اطبع مباشرة:</p>
-
-                <div class="space-y-3">
-                    <button onclick="exportToPDF()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition text-sm">
-                        <i class="fa-solid fa-file-pdf text-lg"></i> تحميل الغلاف كملف PDF عالي الجودة
-                    </button>
-                    <button onclick="window.print()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-3 px-4 rounded-xl border border-slate-700 flex items-center justify-center gap-2 transition text-sm">
-                        <i class="fa-solid fa-print"></i> طباعة الغلاف مباشرة
-                    </button>
-                </div>
-            </div>
-
-            <!-- Quick Tips Footer in Sidebar -->
-            <div class="bg-indigo-950/30 border border-indigo-500/20 rounded-xl p-3.5 mt-auto">
-                <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-lightbulb text-amber-400 text-base mt-0.5"></i>
-                    <p class="text-[11px] text-slate-300 leading-relaxed">
-                        <strong>ملاحظة:</strong> يمكنك النقر مباشرة على أي نص داخل المعاينة (العنوان، الطالب، المشرف) وتعديله بحرية تامة!
-                    </p>
+            <!-- 6. Symbols Section (40+ Symbols) -->
+            <div class="space-y-3 bg-slate-800/50 p-3 sm:p-4 rounded-xl border border-slate-800">
+                <h3 class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+                    <i class="fa-solid fa-icons text-emerald-500"></i> قسم إضافة الرموز (أكثر من 40 رمزاً)
+                </h3>
+                <p class="text-xs text-slate-400">انقر على الرمز لإضافته مباشرة لعنوان التقرير:</p>
+                <div class="grid grid-cols-6 sm:grid-cols-8 gap-2 bg-slate-900 p-3 rounded-lg border border-slate-700 max-h-36 overflow-y-auto" id="symbols-container">
+                    <!-- Populated dynamically -->
                 </div>
             </div>
 
         </div>
 
-        <!-- RIGHT/PREVIEW WORKSPACE PANEL (7 Columns) -->
-        <div class="lg:col-span-7 flex flex-col items-center justify-center bg-slate-950/40 border border-slate-800/80 rounded-2xl p-4 md:p-8 relative min-h-[700px]">
-            
-            <!-- Floating Zoom & Quick Toolbar -->
-            <div class="absolute top-4 left-4 z-10 flex items-center gap-2 bg-slate-900/90 backdrop-blur border border-slate-800 rounded-xl px-3 py-1.5 no-print shadow-lg">
-                <span class="text-xs text-slate-400">معاينة الغلاف الحي</span>
-                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+        <!-- Live Preview Section -->
+        <div class="xl:col-span-7 bg-slate-900/95 backdrop-blur border border-slate-800 rounded-2xl p-3 sm:p-5 shadow-xl flex flex-col items-center justify-center h-auto xl:h-[84vh] overflow-hidden">
+            <div class="w-full flex items-center justify-between mb-2">
+                <h3 class="text-sm font-bold text-slate-200 flex items-center gap-2">
+                    <i class="fa-solid fa-eye text-emerald-500"></i> المعاينة الحية لغلاف التقرير (A4)
+                </h3>
+                <span class="text-xs text-slate-400">مقياس متجاوب تلقائي</span>
             </div>
 
-            <!-- THE ACTUAL COVER PAGE CONTAINER WITH DUAL LOGOS -->
-            <div id="cover-page-target" class="cover-preview-page bg-white text-slate-900 w-full max-w-[650px] aspect-[1/1.414] p-8 md:p-12 flex flex-col justify-between relative transition-all duration-300 rounded-xl shadow-2xl overflow-hidden" style="font-family: 'Cairo', sans-serif;">
-                
-                <!-- Template Decorative Frame Element -->
-                <div id="cover-frame-decorator" class="absolute inset-4 pointer-events-none border-2 border-amber-600/60 rounded-lg"></div>
-
-                <!-- TOP HEADER WITH DUAL LOGOS (RIGHT & LEFT) -->
-                <div class="grid grid-cols-3 items-center gap-2 relative z-10">
-                    <!-- Right Logo Container -->
-                    <div class="flex justify-start">
-                        <div id="logo-right-container" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-slate-100 border-2 border-slate-300 flex items-center justify-center overflow-hidden shadow-sm">
-                            <img id="logo-right-img" src="https://placehold.co/120x120/e2e8f0/475569?text=شعار+يمني" alt="شعار اليمين" class="w-full h-full object-cover">
+            <!-- A4 Preview Container with Adjusted Mobile Scaling -->
+            <div class="preview-container w-full flex-1">
+                <div id="report-cover" style="font-family: 'Cairo', sans-serif;">
+                    
+                    <!-- Header Logos & University -->
+                    <div class="flex items-center justify-between w-full border-b-2 border-emerald-800/20 pb-6">
+                        <div id="logo-right-container" class="w-24 h-24 flex items-center justify-center">
+                            <img id="img-right" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_of_Northern_Technical_University.png" alt="شعار اليمين" class="max-h-24 max-w-24 object-contain transition-all duration-200" style="width: 96px; height: 96px;">
+                        </div>
+                        <div class="text-center flex-1 px-4">
+                            <h2 id="preview-university" class="text-xl font-bold text-slate-800 tracking-wide">الجامعة التقنية الشمالية</h2>
+                            <h3 id="preview-college" class="text-base font-semibold text-emerald-800 mt-1">معهد الإدارة التقني نينوى - قسم الإدارة القانونية</h3>
+                        </div>
+                        <div id="logo-left-container" class="w-24 h-24 flex items-center justify-center">
+                            <img id="img-left" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Iraq.svg" alt="شعار اليسار" class="max-h-24 max-w-24 object-contain transition-all duration-200" style="width: 96px; height: 96px;">
                         </div>
                     </div>
-                    
-                    <!-- Center Header University Info -->
-                    <div class="text-center space-y-1">
-                        <h2 id="preview-university" contenteditable="true" class="text-sm md:text-base font-bold text-slate-800 outline-none focus:ring-1 focus:ring-indigo-400 rounded px-1">الجامعة الإسلامية / جامعة بغداد</h2>
-                        <p id="preview-college" contenteditable="true" class="text-[11px] md:text-xs font-semibold text-slate-600 outline-none focus:ring-1 focus:ring-indigo-400 rounded px-1">كلية الهندسة وتكنولوجيا المعلومات</p>
-                        <p id="preview-department" contenteditable="true" class="text-[10px] md:text-xs font-medium text-slate-500 outline-none focus:ring-1 focus:ring-indigo-400 rounded px-1">قسم هندسة الحاسوب والذكاء الاصطناعي</p>
-                    </div>
 
-                    <!-- Left Logo Container -->
-                    <div class="flex justify-end">
-                        <div id="logo-left-container" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-slate-100 border-2 border-slate-300 flex items-center justify-center overflow-hidden shadow-sm">
-                            <img id="logo-left-img" src="https://placehold.co/120x120/e2e8f0/475569?text=شعار+يساري" alt="شعار اليسار" class="w-full h-full object-cover">
+                    <!-- Center Title & Symbols -->
+                    <div class="text-center my-auto space-y-6 px-8">
+                        <div class="inline-block p-4 rounded-full bg-emerald-50 text-emerald-700 text-3xl shadow-inner mb-2" id="selected-symbol-display">
+                            <i class="fa-solid fa-scale-balanced"></i>
                         </div>
-                    </div>
-                </div>
-
-                <!-- MIDDLE SECTION: Report Type, Basmala, Title & Subtitle -->
-                <div class="text-center space-y-5 my-auto relative z-10">
-                    <div id="preview-basmala" contenteditable="true" class="text-xl md:text-2xl font-['Amiri'] font-bold text-amber-700 outline-none focus:ring-1 focus:ring-indigo-400 rounded py-1">
-                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                    </div>
-                    
-                    <div class="inline-block bg-indigo-50 border border-indigo-200 px-4 py-1.5 rounded-full">
-                        <span id="preview-report-type" contenteditable="true" class="text-xs font-bold text-indigo-800 uppercase tracking-wider outline-none">تقرير تخرج أكاديمي مقدم استكمالاً لمتطلبات الحصول على درجة البكالوريوس</span>
-                    </div>
-
-                    <div class="space-y-3">
-                        <h1 id="preview-title" contenteditable="true" class="text-2xl md:text-3xl font-extrabold text-slate-900 leading-tight outline-none focus:ring-1 focus:ring-indigo-400 rounded p-2">
-                            تصميم وتطوير نظام ذكي متكامل لإدارة وتحليل الأبحاث الأكاديمية باستخدام تقنيات الذكاء الاصطناعي
+                        <h1 id="preview-title" class="text-4xl font-extrabold text-slate-900 leading-relaxed">
+                            المذاهب الفكرية في الالتزام وأثرها في القوانين
                         </h1>
-                        <p id="preview-subtitle" contenteditable="true" class="text-sm font-medium text-slate-600 outline-none focus:ring-1 focus:ring-indigo-400 rounded px-1">
-                            Design and Development of an Intelligent Academic Research Management System
+                        <div class="w-32 h-1 bg-emerald-600 mx-auto rounded-full"></div>
+                        <p class="text-slate-600 text-sm max-w-lg mx-auto leading-relaxed">
+                            بحث مقدم استكمالاً لمتطلبات نيل شهادة الدبلوم التقني في تخصص الإدارة القانونية
                         </p>
                     </div>
-                </div>
 
-                <!-- BOTTOM SECTION: Author & Supervisor Details -->
-                <div class="grid grid-cols-2 gap-8 relative z-10 pt-5 border-t border-slate-200">
-                    <div class="text-right space-y-1">
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">إعداد الطالب (الباحث):</p>
-                        <p id="preview-author" contenteditable="true" class="text-sm font-bold text-slate-800 outline-none focus:ring-1 focus:ring-indigo-400 rounded">محمد أحمد عبد الله</p>
-                        <p id="preview-student-id" contenteditable="true" class="text-xs text-slate-500 outline-none focus:ring-1 focus:ring-indigo-400 rounded">الرقم الجامعي: 202310452</p>
+                    <!-- Footer Info: Author & Supervisor -->
+                    <div class="grid grid-cols-2 gap-8 pt-8 border-t-2 border-emerald-800/20 text-sm font-medium">
+                        <div class="space-y-2 bg-emerald-50/50 p-4 rounded-xl border border-emerald-100">
+                            <p class="text-slate-500 text-xs">إعداد الطالب / الباحث:</p>
+                            <p id="preview-author" class="font-bold text-slate-900 text-base">عبدالرحمن وليد هاشم احمد</p>
+                        </div>
+                        <div class="space-y-2 bg-emerald-50/50 p-4 rounded-xl border border-emerald-100 text-left">
+                            <p class="text-slate-500 text-xs">إشراف الأستاذ:</p>
+                            <p id="preview-supervisor" class="font-bold text-slate-900 text-base">أ.م. الدكتور / مشرف المادة</p>
+                        </div>
                     </div>
-                    <div class="text-left space-y-1">
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">إشراف الأستاذ:</p>
-                        <p id="preview-supervisor" contenteditable="true" class="text-sm font-bold text-slate-800 outline-none focus:ring-1 focus:ring-indigo-400 rounded">أ.د. عبد الرحمن الحَسَني</p>
-                        <p id="preview-degree" contenteditable="true" class="text-xs text-slate-500 outline-none focus:ring-1 focus:ring-indigo-400 rounded">دكتوراه في علوم الحاسوب</p>
+
+                    <!-- Bottom Academic Year & Date -->
+                    <div class="flex justify-between items-center text-xs text-slate-500 pt-4 border-t border-slate-100">
+                        <div>العام الدراسي: <span id="preview-year" class="font-bold text-slate-700">2025 - 2026 م</span></div>
+                        <div>التاريخ: <span id="preview-date" class="font-bold text-slate-700">ربيع الآخر 1447 هـ</span></div>
                     </div>
-                </div>
 
-                <!-- FOOTER SECTION: Academic Year -->
-                <div class="text-center pt-3 relative z-10">
-                    <p id="preview-year" contenteditable="true" class="text-xs font-bold text-slate-600 tracking-widest outline-none focus:ring-1 focus:ring-indigo-400 rounded">العام الدراسي: 1447هـ - 2026م</p>
                 </div>
-
             </div>
 
         </div>
 
     </main>
 
+    <!-- JavaScript Application Logic -->
     <script>
-        // Exactly 50 Templates
-        const templatesList = Array.from({ length: 50 }, (_, i) => {
-            const id = i + 1;
-            let name = `إطار أكاديمي فخم رقم ${id}`;
-            let desc = 'تصميم رسمي معتمد للتقارير';
-            if (id === 1) { name = 'الإطار الذهبي الملكي'; desc = 'خطوط ذهبية مزدوجة فاخرة'; }
-            else if (id === 2) { name = 'الإطار الأزرق التقني'; desc = 'شريط جانبي نيلي معاصر'; }
-            else if (id === 3) { name = 'الإطار الإسلامي المزخرف'; desc = 'زخارف إسلامية أصيلة'; }
-            else if (id === 4) { name = 'الإطار الكلاسيكي المزدوج'; desc = 'إطار ثنائي رفيع رسمي'; }
-            else if (id === 5) { name = 'الإطار المينيمال الهادئ'; desc = 'تصميم نظيف وبسيط جداً'; }
-            else if (id === 10) { name = 'الإطار الملكي العتيق'; desc = 'طابع المخطوطات القديمة'; }
-            else if (id === 20) { name = 'إطار البحث العلمي الحديث'; desc = 'تدرجات عصرية متقدمة'; }
-            else if (id === 35) { name = 'إطار أطروحة الدكتوراه'; desc = 'تصميم هيبة ورسمية فائقة'; }
-            else if (id === 50) { name = 'الإطار الماسي المتقدم'; desc = 'زوايا مزخرفة هندسية'; }
-            return { id, name, desc };
-        });
+        // 40+ Symbols Array
+        const symbolsList = [
+            "fa-scale-balanced", "fa-book-open", "fa-gavel", "fa-landmark", "fa-graduation-cap",
+            "fa-award", "fa-file-contract", "fa-scroll", "fa-pen-nib", "fa-shield-halved",
+            "fa-university", "fa-book", "fa-certificate", "fa-star", "fa-bookmark",
+            "fa-lightbulb", "fa-atom", "fa-globe", "fa-compass", "fa-feather",
+            "fa-balance-scale", "fa-briefcase", "fa-building-columns", "fa-medal", "fa-trophy",
+            "fa-book-bookmark", "fa-signature", "fa-folder-open", "fa-id-card", "fa-chess-queen",
+            "fa-gem", "fa-crown", "fa-key", "fa-lock", "fa-shield",
+            "fa-bullseye", "fa-compass-drafting", "fa-laptop-code", "fa-brain", "fa-cube"
+        ];
 
-        // Exactly 50 Fonts
-        const fontsList = [
-            // Arabic Fonts (25)
-            "Cairo", "Amiri", "Tajawal", "El Messiri", "Aref Ruqaa", "Scheherazade New", "Changa", 
-            "Reem Kufi", "Readex Pro", "IBM Plex Sans Arabic", "Noto Naskh Arabic", "Lateef", 
-            "Katibeh", "Rakkas", "Alexandria", "Almarai", "Markazi Text", "Zain", "Lemonada", 
-            "Lalezar", "Mirza", "Kufam", "Beiruti", "Jomhuria", "Marhey", "Ruwudu",
-            // English / Global Fonts (24)
-            "Montserrat", "Playfair Display", "Roboto", "Open Sans", "Lora", "Cinzel", 
-            "Plus Jakarta Sans", "Space Grotesk", "Outfit", "Inter", "Lato", "Poppins", 
-            "Merriweather", "Cairo Play", "Times New Roman", "Courier New", "Georgia", 
-            "Verdana", "Arial", "Trebuchet MS", "Impact", "Comic Sans MS", "Tahoma", "Century Gothic", "Garamond"
-        ]; // Exactly 50 fonts total
-
-        // Exactly 50 Symbols & Phrases
-        const symbolsList = Array.from({ length: 50 }, (_, i) => {
-            const id = i + 1;
-            let text = `رمز (${id})`;
-            let label = `عنصر أو رمز رقم ${id}`;
-            let cat = 'ornaments';
-
-            if (id === 1) { text = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'; label = 'البسملة الكاملة'; cat = 'basmala'; }
-            else if (id === 2) { text = 'قال تعالى:'; label = 'عبارة قال تعالى'; cat = 'basmala'; }
-            else if (id === 3) { text = '﴿رَبِّ اشْرَحْ لِي صَدْرِي﴾'; label = 'آية الشرح'; cat = 'basmala'; }
-            else if (id === 4) { text = '﴿وَقُل رَّبِّ زِدْنِي عِلْمًا﴾'; label = 'آية العلم'; cat = 'basmala'; }
-            else if (id === 5) { text = 'صدق الله العظيم'; label = 'صدق الله العظيم'; cat = 'basmala'; }
-            else if (id === 6) { text = 'صلى الله عليه وسلم'; label = 'الصلوات على النبي'; cat = 'basmala'; }
-            else if (id === 7) { text = '【 ... 】'; label = 'أقواس مربعة صلبة'; cat = 'brackets'; }
-            else if (id === 8) { text = '『 ... 』'; label = 'أقواس يابانية فاخرة'; cat = 'brackets'; }
-            else if (id === 9) { text = '﴿ ... ﴾'; label = 'أقواس مصحفية'; cat = 'brackets'; }
-            else if (id === 10) { text = '⟨ ... ⟩'; label = 'أقواس رياضية'; cat = 'brackets'; }
-            else if (id === 11) { text = '« ... »'; label = 'أقواس مزدوجة عربية'; cat = 'brackets'; }
-            else if (id === 12) { text = '❖'; label = 'زخرفة ماسية'; cat = 'ornaments'; }
-            else if (id === 13) { text = '✦'; label = 'نجمة لامعة'; cat = 'ornaments'; }
-            else if (id === 14) { text = '✧'; label = 'نجمة مفرغة'; cat = 'ornaments'; }
-            else if (id === 15) { text = '★'; label = 'نجمة كاملة'; cat = 'ornaments'; }
-            else if (id === 16) { text = '⭐'; label = 'نجمة ملونة'; cat = 'ornaments'; }
-            else if (id === 17) { text = '✤'; label = 'زخرفة زهرية'; cat = 'ornaments'; }
-            else if (id === 18) { text = '۝'; label = 'رمز نهاية الآية'; cat = 'ornaments'; }
-            else if (id === 19) { text = '۞'; label = 'رمز الربع الحزب'; cat = 'ornaments'; }
-            else if (id === 20) { text = '💠'; label = 'ألماس هندسي'; cat = 'ornaments'; }
-            else if (id === 21) { text = '⚜'; label = 'زخرفة ملكية'; cat = 'ornaments'; }
-            else if (id === 22) { text = '❇'; label = 'نجمة ثمانية'; cat = 'ornaments'; }
-            else if (id === 23) { text = '❄'; label = 'زخرفة بلورية'; cat = 'ornaments'; }
-            else if (id === 24) { text = '✒'; label = 'قلم كتابة'; cat = 'ornaments'; }
-            else if (id === 25) { text = '📜'; label = 'لفيفة مخطوطة'; cat = 'ornaments'; }
-            else if (id === 26) { text = '📚'; label = 'كتب علمية'; cat = 'academic'; }
-            else if (id === 27) { text = '➤'; label = 'سهم يمين متين'; cat = 'academic'; }
-            else if (id === 28) { text = '➔'; label = 'سهم تفصيلي'; cat = 'academic'; }
-            else if (id === 29) { text = '➜'; label = 'سهم عريض'; cat = 'academic'; }
-            else if (id === 30) { text = '✔'; label = 'علامة صح'; cat = 'academic'; }
-            else if (id === 31) { text = '✅'; label = 'صح أخضر'; cat = 'academic'; }
-            else if (id === 32) { text = '📌'; label = 'دبوس تثبيت'; cat = 'academic'; }
-            else if (id === 33) { text = '💡'; label = 'مصباح إضاءة'; cat = 'academic'; }
-            else if (id === 34) { text = '🔬'; label = 'مجهر بحثي'; cat = 'academic'; }
-            else if (id === 35) { text = '📊'; label = 'رسوم بيانية'; cat = 'academic'; }
-            else if (id === 36) { text = '🎓'; label = 'قبعة التخرج'; cat = 'academic'; }
-            else if (id === 37) { text = '🏫'; label = 'مؤسسة تعليمية'; cat = 'academic'; }
-            else if (id === 38) { text = '📖'; label = 'كتاب مفتوح'; cat = 'academic'; }
-            else if (id === 39) { text = '📝'; label = 'ورقة بحثية'; cat = 'academic'; }
-            else if (id === 40) { text = '🌐'; label = 'شبكة المعرفة'; cat = 'academic'; }
-            else {
-                // Generate additional 10 rich academic phrases to reach exactly 50
-                const phrases = [
-                    "إهداء إلى روح والدتي ووالدي", "خالص الشكر والتقدير لكلية الهندسة", "إشراف لجنة المناهج العلمية",
-                    "بحث علمي مُحكّم وموثق", "طبعة منقحة ومعتمدة", "المملكة الأكاديمية للبحث والتطوير",
-                    "سلسلة التقارير الجامعية المتقدمة", "حقوق الطبع محفوظة للباحث", "مرجع أكاديمي مرصود", "تم بحمد الله وتوفيقه"
-                ];
-                text = phrases[id - 41];
-                label = `عبارة أكاديمية ${id}`;
-                cat = 'basmala';
-            }
-
-            return { id, text, label, cat };
-        });
-
-        function switchTab(tabName) {
-            const tabs = ['paper', 'templates', 'fonts', 'symbols', 'styles', 'export'];
-            tabs.forEach(t => {
-                const panel = document.getElementById(`panel-${t}`);
-                const btn = document.getElementById(`btn-tab-${t}`);
-                if (t === tabName) {
-                    panel.classList.remove('hidden');
-                    btn.className = "px-3 py-2 rounded-lg text-xs font-semibold bg-indigo-600 text-white flex items-center gap-1.5 transition shadow-sm whitespace-nowrap";
-                } else {
-                    panel.classList.add('hidden');
-                    btn.className = "px-3 py-2 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition whitespace-nowrap";
-                }
-            });
-        }
-
-        // Initialize UI components
-        function initializeAppUI() {
-            // Render 50 Templates
-            const templatesGrid = document.getElementById('templates-grid');
-            templatesGrid.innerHTML = '';
-            templatesList.forEach(t => {
+        // Initialize Symbols Grid
+        function initSymbols() {
+            const container = document.getElementById('symbols-container');
+            container.innerHTML = '';
+            symbolsList.forEach(iconClass => {
                 const btn = document.createElement('button');
-                btn.className = "template-card border border-slate-800 bg-slate-900 p-2.5 rounded-xl hover:border-indigo-500 text-right transition group";
-                btn.innerHTML = `
-                    <div class="w-full h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-lg flex items-center justify-center mb-1.5 group-hover:bg-indigo-500/20">
-                        <span class="text-indigo-300 text-[11px] font-bold">قالب #${t.id}</span>
-                    </div>
-                    <span class="text-[11px] font-semibold text-slate-200 block truncate">${t.name}</span>
-                `;
-                btn.onclick = () => setTemplate(t.id);
-                templatesGrid.appendChild(btn);
-            });
-
-            // Render 50 Fonts in Select and Quick buttons
-            const fontSelect = document.getElementById('font-family-select');
-            fontSelect.innerHTML = '';
-            fontsList.forEach((font, idx) => {
-                const opt = document.createElement('option');
-                opt.value = font;
-                opt.innerText = `${idx + 1}. خط ${font}`;
-                fontSelect.appendChild(opt);
-            });
-
-            const quickFontsContainer = document.getElementById('font-quick-buttons');
-            quickFontsContainer.innerHTML = '';
-            fontsList.slice(0, 12).forEach(font => {
-                const fBtn = document.createElement('button');
-                fBtn.className = "bg-slate-900 border border-slate-800 hover:border-indigo-500 p-2 rounded-lg text-xs text-slate-300 truncate";
-                fBtn.style.fontFamily = `"${font}", sans-serif`;
-                fBtn.innerText = font;
-                fBtn.onclick = () => {
-                    fontSelect.value = font;
-                    changeFontFamily(font);
+                btn.type = 'button';
+                btn.className = 'w-9 h-9 rounded bg-slate-800 hover:bg-emerald-600 text-slate-200 flex items-center justify-center transition cursor-pointer text-sm';
+                btn.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+                btn.onclick = () => {
+                    document.getElementById('selected-symbol-display').innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
                 };
-                quickFontsContainer.appendChild(fBtn);
-            });
-
-            // Render 50 Symbols
-            const symbolsContainer = document.getElementById('symbols-container');
-            symbolsContainer.innerHTML = '';
-            symbolsList.forEach(s => {
-                const sBtn = document.createElement('button');
-                sBtn.className = "bg-slate-900 border border-slate-800 hover:border-indigo-500 hover:bg-slate-800 p-2 rounded-xl flex flex-col items-center justify-center gap-1 transition text-center group";
-                sBtn.innerHTML = `
-                    <span class="text-sm text-indigo-300 group-hover:scale-110 transition truncate max-w-full">${s.text}</span>
-                    <span class="text-[9px] text-slate-400 truncate w-full">#${s.id} - ${s.label}</span>
-                `;
-                sBtn.onclick = () => insertSymbolIntoTitle(s.text);
-                symbolsContainer.appendChild(sBtn);
+                container.appendChild(btn);
             });
         }
+        initSymbols();
 
-        function insertSymbolIntoTitle(symbolText) {
+        // Live Text Update
+        function updateText(field) {
+            const val = document.getElementById(`input-${field}`).value;
+            const preview = document.getElementById(`preview-${field}`);
+            if (preview) preview.innerText = val;
+        }
+
+        // Font Family Change
+        function changeFont(fontVal) {
+            const cover = document.getElementById('report-cover');
+            cover.style.fontFamily = fontVal;
+        }
+
+        // Font Size Change
+        function changeFontSize(sizeVal) {
             const titleEl = document.getElementById('preview-title');
-            titleEl.innerText += ' ' + symbolText;
+            titleEl.style.fontSize = sizeVal + 'px';
         }
 
-        function setTemplate(id) {
-            const frameDecorator = document.getElementById('cover-frame-decorator');
-            
-            // Generate styles based on template ID modulo variations
-            const mod = id % 8;
-            if (mod === 0) {
-                frameDecorator.className = "absolute inset-4 pointer-events-none border-4 border-amber-500/80 rounded-lg";
-                frameDecorator.style.borderStyle = "double";
-            } else if (mod === 1) {
-                frameDecorator.className = "absolute inset-4 pointer-events-none border-l-8 border-indigo-600 rounded-l-lg bg-indigo-900/5";
-                frameDecorator.style.borderStyle = "solid";
-            } else if (mod === 2) {
-                frameDecorator.className = "absolute inset-4 pointer-events-none border-2 border-emerald-600/70 rounded-xl bg-emerald-900/5";
-                frameDecorator.style.borderStyle = "groove";
-            } else if (mod === 3) {
-                frameDecorator.className = "absolute inset-6 pointer-events-none border border-slate-300 rounded-none";
-                frameDecorator.style.borderStyle = "solid";
-            } else if (mod === 4) {
-                frameDecorator.className = "absolute inset-4 pointer-events-none border border-rose-500/50 rounded-2xl";
-                frameDecorator.style.borderStyle = "dashed";
-            } else if (mod === 5) {
-                frameDecorator.className = "absolute inset-2 pointer-events-none border-4 border-cyan-500/40 rounded-xl";
-                frameDecorator.style.borderStyle = "solid";
-            } else if (mod === 6) {
-                frameDecorator.className = "absolute inset-4 pointer-events-none border-4 border-amber-900/40 rounded-lg";
-                frameDecorator.style.borderStyle = "ridge";
-            } else {
-                frameDecorator.className = "absolute inset-3 pointer-events-none border-2 border-purple-500/60 rounded-xl";
-                frameDecorator.style.borderStyle = "solid";
-            }
+        // Frame Change
+        function changeFrame(frameClass) {
+            const cover = document.getElementById('report-cover');
+            // احتفاظ بالخصائص الثابتة وإبدال الفئات المتعلقة بالإطار فقط
+            cover.className = `w-[794px] h-[1123px] bg-white text-slate-900 shadow-2xl flex flex-col justify-between relative transition-all duration-300 ${frameClass}`;
         }
 
-        function updatePaperSize() {
-            const selected = document.querySelector('input[name="paperSize"]:checked').value;
-            const target = document.getElementById('cover-page-target');
-            
-            if (selected === 'A4-portrait') {
-                target.className = "cover-preview-page bg-white text-slate-900 w-full max-w-[650px] aspect-[1/1.414] p-8 md:p-12 flex flex-col justify-between relative transition-all duration-300 rounded-xl shadow-2xl overflow-hidden";
-            } else if (selected === 'A4-landscape') {
-                target.className = "cover-preview-page bg-white text-slate-900 w-full max-w-[850px] aspect-[1.414/1] p-8 md:p-12 flex flex-col justify-between relative transition-all duration-300 rounded-xl shadow-2xl overflow-hidden";
-            } else if (selected === 'A3') {
-                target.className = "cover-preview-page bg-white text-slate-900 w-full max-w-[750px] aspect-[1/1.414] p-10 md:p-16 flex flex-col justify-between relative transition-all duration-300 rounded-xl shadow-2xl overflow-hidden";
-            } else if (selected === 'Letter') {
-                target.className = "cover-preview-page bg-white text-slate-900 w-full max-w-[650px] aspect-[1/1.29] p-8 md:p-12 flex flex-col justify-between relative transition-all duration-300 rounded-xl shadow-2xl overflow-hidden";
-            }
+        // Color & Background Functions
+        function changeTextColor(colorHex) {
+            const cover = document.getElementById('report-cover');
+            cover.style.color = colorHex;
+            const titles = cover.querySelectorAll('h1, h2, h3');
+            titles.forEach(t => t.style.color = colorHex);
         }
 
-        function changeFontFamily(font) {
-            const target = document.getElementById('cover-page-target');
-            target.style.fontFamily = `"${font}", sans-serif`;
+        function changeBgColor(colorHex) {
+            const cover = document.getElementById('report-cover');
+            cover.style.backgroundColor = colorHex;
         }
 
-        function changeTitleSize(sizeClass) {
-            const titleEl = document.getElementById('preview-title');
-            titleEl.className = `${sizeClass} font-extrabold text-slate-900 leading-tight outline-none focus:ring-1 focus:ring-indigo-400 rounded p-2`;
+        function setGradient(gradientClass) {
+            const cover = document.getElementById('report-cover');
+            cover.className = cover.className.replace(/bg-[a-zA-Z0-9\-\/]+/g, '');
+            cover.classList.add(...gradientClass.split(' '));
         }
 
-        function changeTextColor(colorClass) {
-            const target = document.getElementById('cover-page-target');
-            target.classList.remove('text-slate-900', 'text-slate-800', 'text-blue-950', 'text-indigo-950', 'text-emerald-950', 'text-amber-950', 'text-rose-950', 'text-purple-950');
-            target.classList.add(colorClass);
-        }
-
-        function changeBgColor(bgColorClass) {
-            const target = document.getElementById('cover-page-target');
-            target.classList.remove('bg-white', 'bg-amber-50/40', 'bg-slate-50', 'bg-blue-50/30', 'bg-emerald-50/30');
-            target.classList.add(bgColorClass);
-        }
-
-        function loadLogo(event, position) {
+        // Logo Upload & Toggle & Size Control
+        function uploadLogo(event, position) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    if (position === 'right') {
-                        document.getElementById('logo-right-img').src = e.target.result;
-                    } else {
-                        document.getElementById('logo-left-img').src = e.target.result;
-                    }
+                    const img = document.getElementById(`img-${position}`);
+                    img.src = e.target.result;
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        function liveUpdate() {
-            const uni = document.getElementById('input-university').value;
-            const col = document.getElementById('input-college').value;
-            const dept = document.getElementById('input-department').value;
-            
-            document.getElementById('preview-university').innerText = uni;
-            document.getElementById('preview-college').innerText = col;
-            document.getElementById('preview-department').innerText = dept;
+        function toggleLogo(position, show) {
+            const container = document.getElementById(`logo-${position}-container`);
+            container.style.display = show ? 'flex' : 'none';
         }
 
-        function exportToPDF() {
-            const element = document.getElementById('cover-page-target');
+        function changeLogoSize(sizeVal) {
+            const imgRight = document.getElementById('img-right');
+            const imgLeft = document.getElementById('img-left');
+            const containerRight = document.getElementById('logo-right-container');
+            const containerLeft = document.getElementById('logo-left-container');
+            
+            const px = sizeVal + 'px';
+            const containerPx = (parseInt(sizeVal) + 8) + 'px';
+
+            imgRight.style.width = px;
+            imgRight.style.height = px;
+            imgRight.style.maxHeight = px;
+            imgRight.style.maxWidth = px;
+            containerRight.style.width = containerPx;
+            containerRight.style.height = containerPx;
+
+            imgLeft.style.width = px;
+            imgLeft.style.height = px;
+            imgLeft.style.maxHeight = px;
+            imgLeft.style.maxWidth = px;
+            containerLeft.style.width = containerPx;
+            containerLeft.style.height = containerPx;
+        }
+
+        // Export as PDF
+        function exportPDF() {
+            const element = document.getElementById('report-cover');
             const opt = {
                 margin:       0,
-                filename:     'Academic_Cover_Report.pdf',
+                filename:     'report_cover.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, logging: false },
+                html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-            
-            const btn = event.currentTarget;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> جاري توليد ملف PDF...`;
-            
-            html2pdf().from(element).set(opt).save().then(() => {
-                btn.innerHTML = originalText;
-            }).catch(err => {
-                console.error(err);
-                btn.innerHTML = originalText;
+            html2pdf().from(element).set(opt).save();
+        }
+
+        // Export as Word (Docx)
+        function exportWord() {
+            const title = document.getElementById('input-title').value;
+            const university = document.getElementById('input-university').value;
+            const college = document.getElementById('input-college').value;
+            const author = document.getElementById('input-author').value;
+            const supervisor = document.getElementById('input-supervisor').value;
+            const year = document.getElementById('input-year').value;
+
+            const doc = new docx.Document({
+                sections: [{
+                    properties: {},
+                    children: [
+                        new docx.Paragraph({
+                            text: university,
+                            heading: docx.HeadingLevel.HEADING_2,
+                            alignment: docx.AlignmentType.CENTER,
+                        }),
+                        new docx.Paragraph({
+                            text: college,
+                            alignment: docx.AlignmentType.CENTER,
+                        }),
+                        new docx.Paragraph({ text: "", spacing: { after: 400 } }),
+                        new docx.Paragraph({
+                            text: title,
+                            heading: docx.HeadingLevel.HEADING_1,
+                            alignment: docx.AlignmentType.CENTER,
+                        }),
+                        new docx.Paragraph({ text: "", spacing: { after: 800 } }),
+                        new docx.Paragraph({
+                            text: `إعداد الطالب: ${author}`,
+                            alignment: docx.AlignmentType.RIGHT,
+                        }),
+                        new docx.Paragraph({
+                            text: `إشراف: ${supervisor}`,
+                            alignment: docx.AlignmentType.LEFT,
+                        }),
+                        new docx.Paragraph({
+                            text: `العام الدراسي: ${year}`,
+                            alignment: docx.AlignmentType.CENTER,
+                        }),
+                    ],
+                }],
+            });
+
+            docx.Packer.toBlob(doc).then((blob) => {
+                saveAs(blob, "report_cover.docx");
             });
         }
 
-        window.onload = function() {
-            initializeAppUI();
+        // Print Report
+        function printReport() {
+            window.print();
         }
     </script>
 </body>
