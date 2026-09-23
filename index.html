@@ -40,15 +40,15 @@
             background: #64748b;
         }
 
-        /* تعديل دقيق ومضغوط لإزالة الفراغات الطويلة وجعل الغلاف طبيعياً بالكامل */
+        /* تنسيق حاوية المعاينة لتظهر ورقة A4 طولية وطبيعية تماماً بدون فراغات أو انكماش */
         .preview-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            overflow: hidden;
+            align-items: center;
+            overflow-x: auto;
             position: relative;
-            padding: 0;
+            padding: 10px 0;
         }
 
         #report-cover {
@@ -65,12 +65,10 @@
             box-sizing: border-box;
             transform-origin: top center;
             transition: transform 0.2s ease;
+            flex-shrink: 0;
         }
 
         @media (max-width: 860px) {
-            .preview-container {
-                height: 600px;
-            }
             #report-cover {
                 transform: scale(0.72);
                 margin-bottom: -310px;
@@ -78,22 +76,16 @@
         }
 
         @media (max-width: 600px) {
-            .preview-container {
-                height: 480px;
-            }
             #report-cover {
-                transform: scale(0.56);
-                margin-bottom: -490px;
+                transform: scale(0.55);
+                margin-bottom: -500px;
             }
         }
 
         @media (max-width: 420px) {
-            .preview-container {
-                height: 420px;
-            }
             #report-cover {
-                transform: scale(0.48);
-                margin-bottom: -580px;
+                transform: scale(0.45);
+                margin-bottom: -610px;
             }
         }
     </style>
@@ -359,7 +351,7 @@
         <div class="xl:col-span-7 bg-slate-900/95 backdrop-blur border border-slate-800 rounded-2xl p-3 sm:p-5 shadow-xl flex flex-col items-center justify-start h-auto xl:h-[84vh] overflow-y-auto">
             <div class="w-full flex items-center justify-between mb-2">
                 <h3 class="text-sm font-bold text-slate-200 flex items-center gap-2">
-                    <i class="fa-solid fa-eye text-emerald-500"></i> المعاينة الحية لغلاف التقرير (A4)
+                    <i class="fa-solid fa-eye text-emerald-500"></i> المعاينة الحية لغلاف التقرير (A4 طبيعي)
                 </h3>
                 <span class="text-xs text-slate-400">مقياس متجاوب تلقائي</span>
             </div>
