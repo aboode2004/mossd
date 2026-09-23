@@ -40,17 +40,16 @@
             background: #64748b;
         }
 
-        /* تعديل وحل مشكلة المعاينة للهواتف وعرض الغلاف كاملاً دون قص */
+        /* ضبط احترافي لمعاينة الغلاف على الهواتف بشكل طبيعي وواسع */
         .preview-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             overflow-x: auto;
-            overflow-y: visible;
+            overflow-y: hidden;
             position: relative;
-            padding: 10px 0;
-            min-height: 600px;
+            padding: 5px 0;
         }
 
         #report-cover {
@@ -71,31 +70,31 @@
 
         @media (max-width: 860px) {
             .preview-container {
-                min-height: 750px;
+                min-height: 720px;
             }
             #report-cover {
-                transform: scale(0.65);
-                margin-bottom: -380px;
+                transform: scale(0.82);
+                margin-bottom: -200px;
             }
         }
 
         @media (max-width: 600px) {
             .preview-container {
-                min-height: 600px;
+                min-height: 580px;
             }
             #report-cover {
-                transform: scale(0.48);
-                margin-bottom: -570px;
+                transform: scale(0.62);
+                margin-bottom: -430px;
             }
         }
 
         @media (max-width: 420px) {
             .preview-container {
-                min-height: 520px;
+                min-height: 500px;
             }
             #report-cover {
-                transform: scale(0.40);
-                margin-bottom: -650px;
+                transform: scale(0.52);
+                margin-bottom: -540px;
             }
         }
     </style>
@@ -366,7 +365,7 @@
                 <span class="text-xs text-slate-400">مقياس متجاوب تلقائي</span>
             </div>
 
-            <!-- A4 Preview Container with Fixed Scale and Full Height View -->
+            <!-- A4 Preview Container with Natural Scale -->
             <div class="preview-container w-full">
                 <div id="report-cover" class="border-4 border-double border-emerald-600" style="font-family: 'Cairo', sans-serif;">
                     
