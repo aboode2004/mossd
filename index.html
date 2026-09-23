@@ -105,13 +105,13 @@
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <button onclick="exportPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer">
+            <button type="button" onclick="exportPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer z-10">
                 <i class="fa-solid fa-file-pdf"></i> PDF
             </button>
-            <button onclick="exportWord()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer">
+            <button type="button" onclick="exportWord()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer z-10">
                 <i class="fa-solid fa-file-word"></i> Word
             </button>
-            <button onclick="printReport()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer">
+            <button type="button" onclick="printReport()" class="bg-slate-700 hover:bg-slate-600 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer z-10">
                 <i class="fa-solid fa-print"></i> طباعة
             </button>
         </div>
@@ -297,10 +297,10 @@
                 <div>
                     <label class="text-xs text-slate-400 block mb-1">أنماط وتدرجات جاهزة:</label>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                        <button onclick="setGradient('bg-white')" class="h-8 rounded bg-white border border-slate-700 shadow cursor-pointer text-xs text-slate-800 font-semibold">أبيض ناصع</button>
-                        <button onclick="setGradient('bg-gradient-to-br from-amber-50 via-white to-amber-100')" class="h-8 rounded bg-amber-100 border border-amber-300 shadow cursor-pointer text-xs text-amber-900 font-semibold">خلفية ذهبية</button>
-                        <button onclick="setGradient('bg-gradient-to-br from-emerald-50 via-white to-teal-50')" class="h-8 rounded bg-emerald-100 border border-emerald-300 shadow cursor-pointer text-xs text-emerald-900 font-semibold">خلفية زمردية</button>
-                        <button onclick="setGradient('bg-gradient-to-br from-slate-100 via-white to-slate-200')" class="h-8 rounded bg-slate-200 border border-slate-400 shadow cursor-pointer text-xs text-slate-900 font-semibold">فحمي فاتح</button>
+                        <button type="button" onclick="setGradient('bg-white')" class="h-8 rounded bg-white border border-slate-700 shadow cursor-pointer text-xs text-slate-800 font-semibold">أبيض ناصع</button>
+                        <button type="button" onclick="setGradient('bg-gradient-to-br from-amber-50 via-white to-amber-100')" class="h-8 rounded bg-amber-100 border border-amber-300 shadow cursor-pointer text-xs text-amber-900 font-semibold">خلفية ذهبية</button>
+                        <button type="button" onclick="setGradient('bg-gradient-to-br from-emerald-50 via-white to-teal-50')" class="h-8 rounded bg-emerald-100 border border-emerald-300 shadow cursor-pointer text-xs text-emerald-900 font-semibold">خلفية زمردية</button>
+                        <button type="button" onclick="setGradient('bg-gradient-to-br from-slate-100 via-white to-slate-200')" class="h-8 rounded bg-slate-200 border border-slate-400 shadow cursor-pointer text-xs text-slate-900 font-semibold">فحمي فاتح</button>
                     </div>
                 </div>
             </div>
@@ -430,62 +430,84 @@
         // Initialize Symbols Grid
         function initSymbols() {
             const container = document.getElementById('symbols-container');
+            if (!container) return;
             container.innerHTML = '';
             symbolsList.forEach(iconClass => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'w-9 h-9 rounded bg-slate-800 hover:bg-emerald-600 text-slate-200 flex items-center justify-center transition cursor-pointer text-sm';
                 btn.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
-                btn.onclick = () => {
-                    document.getElementById('selected-symbol-display').innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+                btn.onclick = function() {
+                    const display = document.getElementById('selected-symbol-display');
+                    if (display) {
+                        display.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+                    }
                 };
                 container.appendChild(btn);
             });
         }
-        initSymbols();
+        
+        // Execute when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initSymbols();
+        });
 
         // Live Text Update
         function updateText(field) {
-            const val = document.getElementById(`input-${field}`).value;
-            const preview = document.getElementById(`preview-${field}`);
-            if (preview) preview.innerText = val;
+            const inputEl = document.getElementById(`input-${field}`);
+            const previewEl = document.getElementById(`preview-${field}`);
+            if (inputEl && previewEl) {
+                previewEl.innerText = inputEl.value;
+            }
         }
 
         // Font Family Change
         function changeFont(fontVal) {
             const cover = document.getElementById('report-cover');
-            cover.style.fontFamily = fontVal;
+            if (cover) {
+                cover.style.fontFamily = fontVal;
+            }
         }
 
         // Font Size Change
         function changeFontSize(sizeVal) {
             const titleEl = document.getElementById('preview-title');
-            titleEl.style.fontSize = sizeVal + 'px';
+            if (titleEl) {
+                titleEl.style.fontSize = sizeVal + 'px';
+            }
         }
 
         // Frame Change
         function changeFrame(frameClass) {
             const cover = document.getElementById('report-cover');
-            cover.className = `w-[794px] h-[1123px] bg-white text-slate-900 shadow-2xl flex flex-col justify-between relative transition-all duration-300 ${frameClass}`;
+            if (cover) {
+                cover.className = `w-[794px] h-[1123px] bg-white text-slate-900 shadow-2xl flex flex-col justify-between relative transition-all duration-300 ${frameClass}`;
+            }
         }
 
         // Color & Background Functions
         function changeTextColor(colorHex) {
             const cover = document.getElementById('report-cover');
-            cover.style.color = colorHex;
-            const titles = cover.querySelectorAll('h1, h2, h3');
-            titles.forEach(t => t.style.color = colorHex);
+            if (cover) {
+                cover.style.color = colorHex;
+                const titles = cover.querySelectorAll('h1, h2, h3');
+                titles.forEach(t => t.style.color = colorHex);
+            }
         }
 
         function changeBgColor(colorHex) {
             const cover = document.getElementById('report-cover');
-            cover.style.backgroundColor = colorHex;
+            if (cover) {
+                cover.style.backgroundColor = colorHex;
+            }
         }
 
         function setGradient(gradientClass) {
             const cover = document.getElementById('report-cover');
-            cover.className = cover.className.replace(/bg-[a-zA-Z0-9\-\/]+/g, '');
-            cover.classList.add(...gradientClass.split(' '));
+            if (cover) {
+                cover.className = cover.className.replace(/bg-[a-zA-Z0-9\-\/]+/g, '');
+                cover.classList.add(...gradientClass.split(' '));
+            }
         }
 
         // Logo Upload & Toggle & Size Control
@@ -495,7 +517,9 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const img = document.getElementById(`img-${position}`);
-                    img.src = e.target.result;
+                    if (img) {
+                        img.src = e.target.result;
+                    }
                 }
                 reader.readAsDataURL(file);
             }
@@ -503,7 +527,9 @@
 
         function toggleLogo(position, show) {
             const container = document.getElementById(`logo-${position}-container`);
-            container.style.display = show ? 'flex' : 'none';
+            if (container) {
+                container.style.display = show ? 'flex' : 'none';
+            }
         }
 
         function changeLogoSize(sizeVal) {
@@ -515,24 +541,29 @@
             const px = sizeVal + 'px';
             const containerPx = (parseInt(sizeVal) + 8) + 'px';
 
-            imgRight.style.width = px;
-            imgRight.style.height = px;
-            imgRight.style.maxHeight = px;
-            imgRight.style.maxWidth = px;
-            containerRight.style.width = containerPx;
-            containerRight.style.height = containerPx;
+            if (imgRight && containerRight) {
+                imgRight.style.width = px;
+                imgRight.style.height = px;
+                imgRight.style.maxHeight = px;
+                imgRight.style.maxWidth = px;
+                containerRight.style.width = containerPx;
+                containerRight.style.height = containerPx;
+            }
 
-            imgLeft.style.width = px;
-            imgLeft.style.height = px;
-            imgLeft.style.maxHeight = px;
-            imgLeft.style.maxWidth = px;
-            containerLeft.style.width = containerPx;
-            containerLeft.style.height = containerPx;
+            if (imgLeft && containerLeft) {
+                imgLeft.style.width = px;
+                imgLeft.style.height = px;
+                imgLeft.style.maxHeight = px;
+                imgLeft.style.maxWidth = px;
+                containerLeft.style.width = containerPx;
+                containerLeft.style.height = containerPx;
+            }
         }
 
         // Export as PDF
         function exportPDF() {
             const element = document.getElementById('report-cover');
+            if (!element) return;
             const opt = {
                 margin:       0,
                 filename:     'report_cover.pdf',
@@ -545,12 +576,19 @@
 
         // Export as Word (Docx)
         function exportWord() {
-            const title = document.getElementById('input-title').value;
-            const university = document.getElementById('input-university').value;
-            const college = document.getElementById('input-college').value;
-            const author = document.getElementById('input-author').value;
-            const supervisor = document.getElementById('input-supervisor').value;
-            const year = document.getElementById('input-year').value;
+            const titleEl = document.getElementById('input-title');
+            const universityEl = document.getElementById('input-university');
+            const collegeEl = document.getElementById('input-college');
+            const authorEl = document.getElementById('input-author');
+            const supervisorEl = document.getElementById('input-supervisor');
+            const yearEl = document.getElementById('input-year');
+
+            const title = titleEl ? titleEl.value : '';
+            const university = universityEl ? universityEl.value : '';
+            const college = collegeEl ? collegeEl.value : '';
+            const author = authorEl ? authorEl.value : '';
+            const supervisor = supervisorEl ? supervisorEl.value : '';
+            const year = yearEl ? yearEl.value : '';
 
             const doc = new docx.Document({
                 sections: [{
@@ -590,6 +628,8 @@
 
             docx.Packer.toBlob(doc).then((blob) => {
                 saveAs(blob, "report_cover.docx");
+            }).catch(err => {
+                console.error("Word export error:", err);
             });
         }
 
