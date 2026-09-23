@@ -40,16 +40,15 @@
             background: #64748b;
         }
 
-        /* ضبط احترافي لمعاينة الغلاف على الهواتف بشكل طبيعي وواسع */
+        /* تعديل دقيق ومضغوط لإزالة الفراغات الطويلة وجعل الغلاف طبيعياً بالكامل */
         .preview-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            overflow-x: auto;
-            overflow-y: hidden;
+            overflow: hidden;
             position: relative;
-            padding: 5px 0;
+            padding: 0;
         }
 
         #report-cover {
@@ -70,31 +69,31 @@
 
         @media (max-width: 860px) {
             .preview-container {
-                min-height: 720px;
+                height: 600px;
             }
             #report-cover {
-                transform: scale(0.82);
-                margin-bottom: -200px;
+                transform: scale(0.72);
+                margin-bottom: -310px;
             }
         }
 
         @media (max-width: 600px) {
             .preview-container {
-                min-height: 580px;
+                height: 480px;
             }
             #report-cover {
-                transform: scale(0.62);
-                margin-bottom: -430px;
+                transform: scale(0.56);
+                margin-bottom: -490px;
             }
         }
 
         @media (max-width: 420px) {
             .preview-container {
-                min-height: 500px;
+                height: 420px;
             }
             #report-cover {
-                transform: scale(0.52);
-                margin-bottom: -540px;
+                transform: scale(0.48);
+                margin-bottom: -580px;
             }
         }
     </style>
@@ -365,7 +364,7 @@
                 <span class="text-xs text-slate-400">مقياس متجاوب تلقائي</span>
             </div>
 
-            <!-- A4 Preview Container with Natural Scale -->
+            <!-- A4 Preview Container with Natural Height & Scale -->
             <div class="preview-container w-full">
                 <div id="report-cover" class="border-4 border-double border-emerald-600" style="font-family: 'Cairo', sans-serif;">
                     
