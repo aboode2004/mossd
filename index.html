@@ -40,14 +40,17 @@
             background: #64748b;
         }
 
-        /* تحسين معاينة الغلاف ودعم التصميم المتجاوب للهواتف */
+        /* تعديل وحل مشكلة المعاينة للهواتف وعرض الغلاف كاملاً دون قص */
         .preview-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            align-items: flex-start;
+            overflow-x: auto;
+            overflow-y: visible;
             position: relative;
+            padding: 10px 0;
+            min-height: 600px;
         }
 
         #report-cover {
@@ -68,34 +71,31 @@
 
         @media (max-width: 860px) {
             .preview-container {
-                height: 720px; /* تقليص الحجم الاحتياطي لمنع الفراغات الكبيرة */
+                min-height: 750px;
             }
             #report-cover {
-                transform: scale(0.68);
-                margin-top: -170px;
-                margin-bottom: -170px;
+                transform: scale(0.65);
+                margin-bottom: -380px;
             }
         }
 
         @media (max-width: 600px) {
             .preview-container {
-                height: 540px;
+                min-height: 600px;
             }
             #report-cover {
-                transform: scale(0.50);
-                margin-top: -270px;
-                margin-bottom: -270px;
+                transform: scale(0.48);
+                margin-bottom: -570px;
             }
         }
 
         @media (max-width: 420px) {
             .preview-container {
-                height: 440px;
+                min-height: 520px;
             }
             #report-cover {
                 transform: scale(0.40);
-                margin-top: -330px;
-                margin-bottom: -330px;
+                margin-bottom: -650px;
             }
         }
     </style>
@@ -358,7 +358,7 @@
         </div>
 
         <!-- Live Preview Section -->
-        <div class="xl:col-span-7 bg-slate-900/95 backdrop-blur border border-slate-800 rounded-2xl p-3 sm:p-5 shadow-xl flex flex-col items-center justify-center h-auto xl:h-[84vh] overflow-hidden">
+        <div class="xl:col-span-7 bg-slate-900/95 backdrop-blur border border-slate-800 rounded-2xl p-3 sm:p-5 shadow-xl flex flex-col items-center justify-start h-auto xl:h-[84vh] overflow-y-auto">
             <div class="w-full flex items-center justify-between mb-2">
                 <h3 class="text-sm font-bold text-slate-200 flex items-center gap-2">
                     <i class="fa-solid fa-eye text-emerald-500"></i> المعاينة الحية لغلاف التقرير (A4)
@@ -366,9 +366,9 @@
                 <span class="text-xs text-slate-400">مقياس متجاوب تلقائي</span>
             </div>
 
-            <!-- A4 Preview Container with Adjusted Mobile Scaling -->
-            <div class="preview-container w-full flex-1">
-                <div id="report-cover" style="font-family: 'Cairo', sans-serif;">
+            <!-- A4 Preview Container with Fixed Scale and Full Height View -->
+            <div class="preview-container w-full">
+                <div id="report-cover" class="border-4 border-double border-emerald-600" style="font-family: 'Cairo', sans-serif;">
                     
                     <!-- Header Logos & University -->
                     <div class="flex items-center justify-between w-full border-b-2 border-emerald-800/20 pb-6">
@@ -476,7 +476,6 @@
         // Frame Change
         function changeFrame(frameClass) {
             const cover = document.getElementById('report-cover');
-            // احتفاظ بالخصائص الثابتة وإبدال الفئات المتعلقة بالإطار فقط
             cover.className = `w-[794px] h-[1123px] bg-white text-slate-900 shadow-2xl flex flex-col justify-between relative transition-all duration-300 ${frameClass}`;
         }
 
