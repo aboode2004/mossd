@@ -105,8 +105,8 @@
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <button type="button" onclick="exportPDF()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer z-10">
-                <i class="fa-solid fa-file-pdf"></i> PDF
+            <button type="button" onclick="exportImage()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer z-10">
+                <i class="fa-solid fa-image"></i> تحميل صورة
             </button>
             <button type="button" onclick="exportWord()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition flex items-center gap-2 cursor-pointer z-10">
                 <i class="fa-solid fa-file-word"></i> Word
@@ -560,18 +560,23 @@
             }
         }
 
-        // Export as PDF
-        function exportPDF() {
+        // Export as High-Quality Image (PNG)
+        function exportImage() {
             const element = document.getElementById('report-cover');
             if (!element) return;
-            const opt = {
-                margin:       0,
-                filename:     'report_cover.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().from(element).set(opt).save();
+            
+            html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'report_cover.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(err => {
+                console.error("Image export error:", err);
+            });
         }
 
         // Export as Word (Docx)
