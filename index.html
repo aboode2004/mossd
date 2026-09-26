@@ -1,2334 +1,515 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>استوديو تصميم أغطية التقارير الاحترافي</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Changa:wght@300;500;700&family=El+Messiri:wght@400;600;700&family=Tajawal:wght@300;400;700;900&family=Reem+Kufi:wght@400;600;700&family=Scheherazade+New:wght@400;700&family=Lateef&family=Harmattan:wght@400;700&family=Readex+Pro:wght@300;500;700&family=Almarai:wght@300;400;700&family=Markazi+Text:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&family=Lemonada:wght@300;500;700&family=Mirza:wght@400;600;700&family=Aref+Ruqaa:wght@400;700&family=Katibeh&family=Rakkas&family=Noto+Serif+Arabic:wght@400;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700&family=Zain:wght@300;400;700&family=Baloo+Bhaijaan+2:wght@400;600;700&family=Lalezar&family=Alex+Brush&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&family=Poppins:wght@300;400;700&family=Oswald:wght@400;700&family=Merriweather:wght@400;700&family=Lora:wght@400;700&family=Cairo+Play:wght@400;700&family=Marhey:wght@400;700&family=Mada:wght@300;400;700&family=Vibes&family=Great+Vibes&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-
-<style>
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Cairo',sans-serif;
-    background:#0f172a;
-    color:#f8fafc;
-}
-
-::-webkit-scrollbar{
-    width:7px;
-    height:7px;
-}
-
-::-webkit-scrollbar-track{
-    background:#1e293b;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#475569;
-    border-radius:5px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:#64748b;
-}
-
-.preview-container{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    overflow:auto;
-    position:relative;
-    padding:15px;
-    min-height:500px;
-}
-
-#report-cover{
-    width:794px;
-    height:1123px;
-    min-width:794px;
-    background:#fff;
-    color:#0f172a;
-    box-shadow:0 25px 50px -12px rgba(0,0,0,.55);
-    padding:48px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    position:relative;
-    box-sizing:border-box;
-    transform-origin:top center;
-    transition:transform .2s ease;
-    flex-shrink:0;
-    overflow:hidden;
-}
-
-.cover-landscape{
-    width:1123px !important;
-    height:794px !important;
-    min-width:1123px !important;
-}
-
-.cover-pattern{
-    background-image:
-    radial-gradient(rgba(16,185,129,.08) 1px,transparent 1px);
-    background-size:18px 18px;
-}
-
-.watermark{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%) rotate(-30deg);
-    font-size:85px;
-    font-weight:900;
-    color:rgba(15,23,42,.035);
-    white-space:nowrap;
-    pointer-events:none;
-    z-index:0;
-}
-
-.cover-content{
-    position:relative;
-    z-index:2;
-}
-
-.loading-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(2,6,23,.8);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    backdrop-filter:blur(5px);
-}
-
-.loading-box{
-    background:#1e293b;
-    padding:30px;
-    border-radius:18px;
-    text-align:center;
-    border:1px solid #334155;
-}
-
-@media(max-width:860px){
-
-    #report-cover{
-        transform:scale(.72);
-        margin-bottom:-300px;
-    }
-
-    .cover-landscape{
-        transform:scale(.58);
-        margin-bottom:-330px;
-    }
-}
-
-@media(max-width:600px){
-
-    #report-cover{
-        transform:scale(.55);
-        margin-bottom:-500px;
-    }
-
-    .cover-landscape{
-        transform:scale(.43);
-        margin-bottom:-450px;
-    }
-}
-
-@media print{
-
-    body{
-        background:#fff!important;
-    }
-
-    body>*:not(#print-area){
-        display:none!important;
-    }
-
-    #print-area{
-        display:block!important;
-    }
-
-    #report-cover{
-        transform:none!important;
-        box-shadow:none!important;
-        margin:0!important;
-    }
-
-    @page{
-        size:A4;
-        margin:0;
-    }
-}
-
-#print-area{
-    display:none;
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة ومتابعة الديون - 2027 Enterprise Secure Edition</title>
+    <!-- Tailwind CSS 2027 Ultra Design System -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@450;600;700;900&display=swap" rel="stylesheet">
+    <!-- SheetJS for Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: radial-gradient(circle at top right, #f8fafc, #e2e8f0);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+    </style>
 </head>
-
-<body class="min-h-screen flex flex-col">
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
-<header class="bg-slate-900 border-b border-slate-800 shadow-lg px-4 py-3 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-50">
-
-<div class="flex items-center gap-3">
-
-<div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white text-xl">
-<i class="fa-solid fa-file-shield"></i>
-</div>
-
-<div>
-<h1 class="text-base sm:text-lg font-bold">
-استوديو تصميم أغطية التقارير
-</h1>
-
-<p class="text-[11px] text-slate-400">
-نظام متكامل لتصميم وتصدير الغلاف الأكاديمي
-</p>
-</div>
-
-</div>
-
-<div class="flex flex-wrap gap-2">
-
-<button onclick="exportImage()"
-class="bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded-lg text-xs">
-<i class="fa-solid fa-image"></i>
-تحميل PNG
-</button>
-
-<button onclick="exportPDF()"
-class="bg-red-600 hover:bg-red-500 px-3 py-2 rounded-lg text-xs">
-<i class="fa-solid fa-file-pdf"></i>
-تحميل PDF
-</button>
-
-<button onclick="exportWord()"
-class="bg-blue-600 hover:bg-blue-500 px-3 py-2 rounded-lg text-xs">
-<i class="fa-solid fa-file-word"></i>
-Word
-</button>
-
-<button onclick="printReport()"
-class="bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded-lg text-xs">
-<i class="fa-solid fa-print"></i>
-طباعة
-</button>
-
-</div>
-</header>
-
-
-<main class="flex-1 p-3 sm:p-5 grid grid-cols-1 xl:grid-cols-12 gap-5 max-w-[1750px] mx-auto w-full">
-
-
-<!-- =========================================================
-     CONTROL PANEL
-========================================================= -->
-
-<div class="xl:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col gap-5 h-auto xl:h-[86vh] overflow-y-auto">
-
-<div class="border-b border-slate-800 pb-3">
-
-<h2 class="font-bold text-emerald-400">
-<i class="fa-solid fa-sliders"></i>
-لوحة التحكم
-</h2>
-
-<p class="text-xs text-slate-400">
-تحكم كامل بالغلاف
-</p>
-
-</div>
-
-
-<!-- =========================================================
-     1 TEXT
-========================================================= -->
-
-<div class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-
-<h3 class="font-semibold">
-<i class="fa-solid fa-pen-nib text-emerald-500"></i>
-بيانات التقرير والعناوين
-</h3>
-
-<label class="text-xs text-slate-400">اسم المؤسسة / الجامعة</label>
-
-<input id="input-university"
-value="الجامعة التقنية الشمالية"
-oninput="updateText('university')"
-class="input">
-
-<label class="text-xs text-slate-400">الكلية / المعهد / القسم</label>
-
-<input id="input-college"
-value="معهد الإدارة التقني نينوى - قسم الإدارة القانونية"
-oninput="updateText('college')"
-class="input">
-
-<label class="text-xs text-slate-400">عنوان التقرير</label>
-
-<input id="input-title"
-value="المذاهب الفكرية في الالتزام وأثرها في القوانين"
-oninput="updateText('title')"
-class="input">
-
-<div class="grid grid-cols-2 gap-3">
-
-<div>
-<label class="text-xs text-slate-400">الطالب</label>
-<input id="input-author"
-value="عبدالرحمن وليد هاشم احمد"
-oninput="updateText('author')"
-class="input">
-</div>
-
-<div>
-<label class="text-xs text-slate-400">المشرف</label>
-<input id="input-supervisor"
-value="أ.م. الدكتور / مشرف المادة"
-oninput="updateText('supervisor')"
-class="input">
-</div>
-
-</div>
-
-<div class="grid grid-cols-2 gap-3">
-
-<div>
-<label class="text-xs text-slate-400">العام الدراسي</label>
-<input id="input-year"
-value="2025 - 2026 م"
-oninput="updateText('year')"
-class="input">
-</div>
-
-<div>
-<label class="text-xs text-slate-400">التاريخ</label>
-<input id="input-date"
-value="ربيع الآخر 1447 هـ"
-oninput="updateText('date')"
-class="input">
-</div>
-
-</div>
-
-<div class="grid grid-cols-2 gap-3">
-
-<div>
-<label class="text-xs text-slate-400">المرحلة</label>
-<input id="input-stage"
-value="المرحلة الثانية"
-oninput="updateText('stage')"
-class="input">
-</div>
-
-<div>
-<label class="text-xs text-slate-400">الشعبة</label>
-<input id="input-section"
-value="الشعبة الأولى"
-oninput="updateText('section')"
-class="input">
-</div>
-
-</div>
-
-<div class="grid grid-cols-2 gap-3">
-
-<div>
-<label class="text-xs text-slate-400">رقم التقرير</label>
-<input id="input-number"
-value="01"
-oninput="updateText('number')"
-class="input">
-</div>
-
-<div>
-<label class="text-xs text-slate-400">التخصص</label>
-<input id="input-specialty"
-value="الإدارة القانونية"
-oninput="updateText('specialty')"
-class="input">
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     2 FONTS
-========================================================= -->
-
-<div class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-
-<h3 class="font-semibold">
-<i class="fa-solid fa-font text-emerald-500"></i>
-قسم الخطوط
-</h3>
-
-<select id="font-family-select"
-onchange="changeFont(this.value)"
-class="input">
-
-<option value="'Cairo',sans-serif">Cairo</option>
-<option value="'Amiri',serif">Amiri</option>
-<option value="'Tajawal',sans-serif">Tajawal</option>
-<option value="'Changa',sans-serif">Changa</option>
-<option value="'El Messiri',sans-serif">El Messiri</option>
-<option value="'Reem Kufi',sans-serif">Reem Kufi</option>
-<option value="'Scheherazade New',serif">Scheherazade New</option>
-<option value="'Lateef',serif">Lateef</option>
-<option value="'Harmattan',serif">Harmattan</option>
-<option value="'Readex Pro',sans-serif">Readex Pro</option>
-<option value="'Almarai',sans-serif">Almarai</option>
-<option value="'Markazi Text',serif">Markazi Text</option>
-<option value="'IBM Plex Sans Arabic',sans-serif">IBM Plex Sans Arabic</option>
-<option value="'Lemonada',cursive">Lemonada</option>
-<option value="'Mirza',cursive">Mirza</option>
-<option value="'Aref Ruqaa',serif">Aref Ruqaa</option>
-<option value="'Katibeh',serif">Katibeh</option>
-<option value="'Rakkas',cursive">Rakkas</option>
-<option value="'Noto Serif Arabic',serif">Noto Serif Arabic</option>
-<option value="'Noto Sans Arabic',sans-serif">Noto Sans Arabic</option>
-<option value="'Zain',sans-serif">Zain</option>
-<option value="'Baloo Bhaijaan 2',cursive">Baloo Bhaijaan 2</option>
-<option value="'Lalezar',cursive">Lalezar</option>
-<option value="'Alex Brush',cursive">Alex Brush</option>
-<option value="'Cinzel',serif">Cinzel</option>
-<option value="'Montserrat',sans-serif">Montserrat</option>
-<option value="'Playfair Display',serif">Playfair Display</option>
-<option value="'Roboto',sans-serif">Roboto</option>
-<option value="'Poppins',sans-serif">Poppins</option>
-<option value="'Oswald',sans-serif">Oswald</option>
-<option value="'Merriweather',serif">Merriweather</option>
-<option value="'Lora',serif">Lora</option>
-<option value="'Cairo Play',sans-serif">Cairo Play</option>
-<option value="'Marhey',cursive">Marhey</option>
-<option value="'Mada',sans-serif">Mada</option>
-<option value="'Vibes',cursive">Vibes</option>
-<option value="'Great Vibes',cursive">Great Vibes</option>
-
-</select>
-
-<label class="text-xs text-slate-400">
-حجم العنوان
-</label>
-
-<input id="title-size"
-type="range"
-min="20"
-max="60"
-value="38"
-oninput="changeFontSize(this.value)"
-class="w-full accent-emerald-500">
-
-<div class="grid grid-cols-2 gap-2">
-
-<button onclick="setFontWeight('400')" class="controlBtn">
-عادي
-</button>
-
-<button onclick="setFontWeight('700')" class="controlBtn">
-عريض
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     3 FRAMES
-========================================================= -->
-
-<div class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-
-<h3 class="font-semibold">
-<i class="fa-solid fa-border-all text-emerald-500"></i>
-الإطارات
-</h3>
-
-<select id="frame-select"
-onchange="changeFrame(this.value)"
-class="input">
-
-<option value="double-emerald">إطار زمردي مزدوج</option>
-<option value="royal">إطار ملكي</option>
-<option value="dashed">إطار متقطع</option>
-<option value="gold">إطار ذهبي</option>
-<option value="blue">إطار أزرق</option>
-<option value="purple">إطار أرجواني</option>
-<option value="red">إطار أحمر رسمي</option>
-<option value="cyan">إطار سماوي</option>
-<option value="black">إطار أسود</option>
-<option value="bronze">إطار برونزي</option>
-<option value="inner">إطار داخلي</option>
-<option value="triple">إطار ثلاثي</option>
-
-</select>
-
-</div>
-
-
-<!-- =========================================================
-     4 COLORS
-========================================================= -->
-
-<div class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-
-<h3 class="font-semibold">
-<i class="fa-solid fa-palette text-emerald-500"></i>
-الألوان والخلفيات
-</h3>
-
-<div class="grid grid-cols-2 gap-3">
-
-<div>
-<label class="text-xs">لون النص</label>
-<input type="color"
-id="text-color-picker"
-value="#0f172a"
-oninput="changeTextColor(this.value)"
-class="w-full h-10">
-</div>
-
-<div>
-<label class="text-xs">لون الخلفية</label>
-<input type="color"
-id="bg-color-picker"
-value="#ffffff"
-oninput="changeBgColor(this.value)"
-class="w-full h-10">
-</div>
-
-</div>
-
-<div class="grid grid-cols-2 gap-2">
-
-<button onclick="setBackground('#ffffff')" class="colorBtn">أبيض</button>
-<button onclick="setBackground('linear-gradient(135deg,#fff,#fef3c7)')" class="colorBtn">ذهبي</button>
-<button onclick="setBackground('linear-gradient(135deg,#ecfdf5,#ffffff,#ccfbf1)')" class="colorBtn">زمردي</button>
-<button onclick="setBackground('linear-gradient(135deg,#f1f5f9,#ffffff,#e2e8f0)')" class="colorBtn">رمادي</button>
-<button onclick="setBackground('linear-gradient(135deg,#eff6ff,#fff,#dbeafe)')" class="colorBtn">أزرق</button>
-<button onclick="setBackground('linear-gradient(135deg,#faf5ff,#fff,#f3e8ff)')" class="colorBtn">بنفسجي</button>
-
-</div>
-
-<label class="flex items-center gap-2 text-xs">
-<input type="checkbox" onchange="togglePattern(this.checked)" class="accent-emerald-500">
-إضافة نمط زخرفي للخلفية
-</label>
-
-</div>
-
-
-<!-- =========================================================
-     5 LOGOS
-========================================================= -->
-
-<div class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-
-<h3 class="font-semibold">
-<i class="fa-solid fa-shield-halved text-emerald-500"></i>
-الشعارات
-</h3>
-
-<div class="grid grid-cols-2 gap-3">
-
-<div>
-
-<label class="text-xs">شعار اليمين</label>
-
-<input type="file"
-accept="image/*"
-onchange="uploadLogo(event,'right')"
-class="w-full text-xs">
-
-<button onclick="removeLogo('right')"
-class="dangerBtn mt-2 w-full">
-حذف
-</button>
-
-</div>
-
-<div>
-
-<label class="text-xs">شعار اليسار</label>
-
-<input type="file"
-accept="image/*"
-onchange="uploadLogo(event,'left')"
-class="w-full text-xs">
-
-<button onclick="removeLogo('left')"
-class="dangerBtn mt-2 w-full">
-حذف
-</button>
-
-</div>
-
-</div>
-
-<div class="flex gap-4 text-xs">
-
-<label>
-<input type="checkbox"
-id="toggle-logo-right"
-checked
-onchange="toggleLogo('right',this.checked)">
-إظهار اليمين
-</label>
-
-<label>
-<input type="checkbox"
-id="toggle-logo-left"
-checked
-onchange="toggleLogo('left',this.checked)">
-إظهار اليسار
-</label>
-
-</div>
-
-<label class="text-xs">
-حجم الشعارات
-</label>
-
-<input type="range"
-min="40"
-max="160"
-value="96"
-oninput="changeLogoSize(this.value)"
-class="w-full accent-emerald-500">
-
-</div>
-
-
-<!-- =========================================================
-     6 SYMBOLS
-========================================================= -->
-
-<div class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-
-<h3 class="font-semibold">
-<i class="fa-solid fa-icons text-emerald-500"></i>
-الرموز
-</h3>
-
-<div id="symbols-container"
-class="grid grid-cols-7 gap-2 max-h-40 overflow-auto bg-slate-900 p-3 rounded-lg">
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     7 NEW ADVANCED OPTIONS
-========================================================= -->
-
-<div class="space-y-4 bg-slate-800/50 p-4 rounded-xl border border-emerald-700/40">
-
-<h3 class="font-semibold text-emerald-400">
-<i class="fa-solid fa-wand-magic-sparkles"></i>
-أدوات التصميم الجديدة
-</h3>
-
-
-<!-- orientation -->
-
-<div>
-
-<label class="text-xs text-slate-400">
-اتجاه الصفحة
-</label>
-
-<div class="grid grid-cols-2 gap-2 mt-2">
-
-<button onclick="setOrientation('portrait')"
-class="controlBtn">
-<i class="fa-solid fa-file"></i>
-عمودي A4
-</button>
-
-<button onclick="setOrientation('landscape')"
-class="controlBtn">
-<i class="fa-solid fa-file"></i>
-أفقي A4
-</button>
-
-</div>
-
-</div>
-
-
-<!-- zoom -->
-
-<div>
-
-<label class="text-xs text-slate-400">
-تكبير المعاينة
-</label>
-
-<div class="flex gap-2 mt-2">
-
-<button onclick="zoomOut()" class="controlBtn">−</button>
-
-<button onclick="resetZoom()" class="controlBtn flex-1">
-<span id="zoomValue">100%</span>
-</button>
-
-<button onclick="zoomIn()" class="controlBtn">+</button>
-
-</div>
-
-</div>
-
-
-<!-- title controls -->
-
-<div>
-
-<label class="text-xs text-slate-400">
-محاذاة العنوان
-</label>
-
-<div class="grid grid-cols-3 gap-2 mt-2">
-
-<button onclick="setTitleAlign('right')" class="controlBtn">يمين</button>
-<button onclick="setTitleAlign('center')" class="controlBtn">وسط</button>
-<button onclick="setTitleAlign('left')" class="controlBtn">يسار</button>
-
-</div>
-
-</div>
-
-
-<!-- watermark -->
-
-<div>
-
-<label class="text-xs text-slate-400">
-العلامة المائية
-</label>
-
-<input id="watermark-input"
-value=""
-placeholder="مثلاً: قسم الإدارة القانونية"
-oninput="updateWatermark()"
-class="input">
-
-</div>
-
-
-<!-- description -->
-
-<div>
-
-<label class="text-xs text-slate-400">
-الوصف أسفل العنوان
-</label>
-
-<textarea id="description-input"
-oninput="updateDescription()"
-class="input"
-rows="3">بحث مقدم استكمالاً لمتطلبات نيل شهادة الدبلوم التقني في تخصص الإدارة القانونية</textarea>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     8 SAVE
-========================================================= -->
-
-<div class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-
-<h3 class="font-semibold">
-<i class="fa-solid fa-floppy-disk text-emerald-500"></i>
-الحفظ وإدارة التصميم
-</h3>
-
-<div class="grid grid-cols-2 gap-2">
-
-<button onclick="saveDesign()"
-class="bg-emerald-700 hover:bg-emerald-600 p-2 rounded-lg text-xs">
-<i class="fa-solid fa-save"></i>
-حفظ التصميم
-</button>
-
-<button onclick="loadDesign()"
-class="bg-blue-700 hover:bg-blue-600 p-2 rounded-lg text-xs">
-<i class="fa-solid fa-folder-open"></i>
-استرجاع
-</button>
-
-<button onclick="undoChange()"
-class="bg-purple-700 hover:bg-purple-600 p-2 rounded-lg text-xs">
-<i class="fa-solid fa-rotate-left"></i>
-تراجع
-</button>
-
-<button onclick="resetDesign()"
-class="bg-red-700 hover:bg-red-600 p-2 rounded-lg text-xs">
-<i class="fa-solid fa-trash-arrow-up"></i>
-إعادة ضبط
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     PREVIEW
-========================================================= -->
-
-<div class="xl:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-3 sm:p-5 shadow-xl flex flex-col items-center h-auto xl:h-[86vh] overflow-auto">
-
-<div class="w-full flex justify-between mb-3">
-
-<h3 class="font-bold">
-<i class="fa-solid fa-eye text-emerald-500"></i>
-المعاينة الحية
-</h3>
-
-<span class="text-xs text-slate-400">
-A4
-</span>
-
-</div>
-
-
-<div class="preview-container">
-
-<div id="report-cover"
-class="border-4 border-double border-emerald-600"
-style="font-family:'Cairo',sans-serif;">
-
-<div class="watermark" id="watermark"></div>
-
-
-<!-- HEADER -->
-
-<div class="cover-content flex items-center justify-between w-full border-b-2 border-emerald-800/20 pb-6">
-
-<div id="logo-right-container"
-class="w-24 h-24 flex items-center justify-center">
-
-<img id="img-right"
-src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_of_Northern_Technical_University.png"
-class="max-h-24 max-w-24 object-contain"
-crossorigin="anonymous">
-
-</div>
-
-
-<div class="text-center flex-1 px-4">
-
-<h2 id="preview-university"
-class="text-xl font-bold">
-الجامعة التقنية الشمالية
-</h2>
-
-<h3 id="preview-college"
-class="text-base font-semibold text-emerald-800 mt-1">
-معهد الإدارة التقني نينوى - قسم الإدارة القانونية
-</h3>
-
-</div>
-
-
-<div id="logo-left-container"
-class="w-24 h-24 flex items-center justify-center">
-
-<img id="img-left"
-src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Iraq.svg"
-class="max-h-24 max-w-24 object-contain"
-crossorigin="anonymous">
-
-</div>
-
-</div>
-
-
-<!-- CENTER -->
-
-<div class="cover-content text-center my-auto space-y-6 px-8">
-
-<div id="selected-symbol-display"
-class="inline-block p-4 rounded-full bg-emerald-50 text-emerald-700 text-3xl shadow-inner">
-
-<i class="fa-solid fa-scale-balanced"></i>
-
-</div>
-
-
-<h1 id="preview-title"
-class="text-4xl font-extrabold leading-relaxed">
-
-المذاهب الفكرية في الالتزام وأثرها في القوانين
-
-</h1>
-
-
-<div class="w-32 h-1 bg-emerald-600 mx-auto rounded-full"></div>
-
-
-<p id="preview-description"
-class="text-slate-600 text-sm max-w-lg mx-auto leading-relaxed">
-
-بحث مقدم استكمالاً لمتطلبات نيل شهادة الدبلوم التقني في تخصص الإدارة القانونية
-
-</p>
-
-</div>
-
-
-<!-- FOOTER -->
-
-<div class="cover-content grid grid-cols-2 gap-8 pt-8 border-t-2 border-emerald-800/20">
-
-<div class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100">
-
-<p class="text-slate-500 text-xs">
-إعداد الطالب / الباحث:
-</p>
-
-<p id="preview-author"
-class="font-bold text-slate-900 text-base">
-عبدالرحمن وليد هاشم احمد
-</p>
-
-</div>
-
-
-<div class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100 text-left">
-
-<p class="text-slate-500 text-xs">
-إشراف الأستاذ:
-</p>
-
-<p id="preview-supervisor"
-class="font-bold text-slate-900 text-base">
-أ.م. الدكتور / مشرف المادة
-</p>
-
-</div>
-
-</div>
-
-
-<div class="cover-content grid grid-cols-2 gap-4 text-xs text-slate-500 pt-4 border-t">
-
-<div>
-العام الدراسي:
-<strong id="preview-year">2025 - 2026 م</strong>
-</div>
-
-<div class="text-left">
-التاريخ:
-<strong id="preview-date">ربيع الآخر 1447 هـ</strong>
-</div>
-
-</div>
-
-
-<div class="cover-content flex justify-between text-xs text-slate-500">
-
-<span>
-المرحلة:
-<strong id="preview-stage">المرحلة الثانية</strong>
-</span>
-
-<span>
-الشعبة:
-<strong id="preview-section">الشعبة الأولى</strong>
-</span>
-
-<span>
-رقم التقرير:
-<strong id="preview-number">01</strong>
-</span>
-
-</div>
-
-
-</div>
-
-</div>
-
-</div>
-
-</main>
-
-
-<!-- PRINT -->
-
-<div id="print-area"></div>
-
-
-<!-- LOADING -->
-
-<div id="loading-overlay" class="loading-overlay">
-
-<div class="loading-box">
-
-<div class="text-4xl text-emerald-500 mb-4">
-<i class="fa-solid fa-spinner fa-spin"></i>
-</div>
-
-<h3 class="font-bold">
-جاري تجهيز الملف
-</h3>
-
-<p id="loading-text"
-class="text-xs text-slate-400 mt-2">
-يرجى الانتظار...
-</p>
-
-</div>
-
-</div>
-
-
-<style>
-
-/* INPUTS */
-
-.input{
-    width:100%;
-    background:#0f172a;
-    border:1px solid #334155;
-    border-radius:8px;
-    padding:8px 10px;
-    color:#e2e8f0;
-    outline:none;
-    margin-bottom:5px;
-}
-
-.input:focus{
-    border-color:#10b981;
-}
-
-.controlBtn{
-    background:#334155;
-    color:#e2e8f0;
-    padding:7px;
-    border-radius:7px;
-    font-size:11px;
-    cursor:pointer;
-}
-
-.controlBtn:hover{
-    background:#10b981;
-    color:white;
-}
-
-.colorBtn{
-    height:34px;
-    background:#334155;
-    border-radius:7px;
-    font-size:11px;
-}
-
-.colorBtn:hover{
-    background:#10b981;
-}
-
-.dangerBtn{
-    background:#991b1b;
-    color:white;
-    padding:5px;
-    border-radius:6px;
-    font-size:10px;
-}
-
-.dangerBtn:hover{
-    background:#dc2626;
-}
-
-</style>
-
-
-<script>
-
-/* =========================================================
-   SYMBOLS
-========================================================= */
-
-const symbolsList = [
-
-"fa-scale-balanced",
-"fa-book-open",
-"fa-gavel",
-"fa-landmark",
-"fa-graduation-cap",
-"fa-award",
-"fa-file-contract",
-"fa-scroll",
-"fa-pen-nib",
-"fa-shield-halved",
-"fa-university",
-"fa-book",
-"fa-certificate",
-"fa-star",
-"fa-bookmark",
-"fa-lightbulb",
-"fa-atom",
-"fa-globe",
-"fa-compass",
-"fa-feather",
-"fa-balance-scale",
-"fa-briefcase",
-"fa-building-columns",
-"fa-medal",
-"fa-trophy",
-"fa-book-bookmark",
-"fa-signature",
-"fa-folder-open",
-"fa-id-card",
-"fa-chess-queen",
-"fa-gem",
-"fa-crown",
-"fa-key",
-"fa-lock",
-"fa-shield",
-"fa-bullseye",
-"fa-compass-drafting",
-"fa-laptop-code",
-"fa-brain",
-"fa-cube",
-"fa-circle-check",
-"fa-circle-info",
-"fa-lightbulb",
-"fa-feather-pointed",
-"fa-scroll-torah",
-"fa-user-graduate",
-"fa-book-medical",
-"fa-file-lines",
-"fa-folder-tree",
-"fa-pen"
-];
-
-
-function initSymbols(){
-
-const container=document.getElementById("symbols-container");
-
-container.innerHTML="";
-
-symbolsList.forEach(icon=>{
-
-const button=document.createElement("button");
-
-button.type="button";
-
-button.className=
-"w-9 h-9 rounded bg-slate-800 hover:bg-emerald-600 text-slate-200 flex items-center justify-center transition cursor-pointer";
-
-button.innerHTML=
-`<i class="fa-solid ${icon}"></i>`;
-
-button.onclick=()=>{
-
-saveHistory();
-
-document.getElementById("selected-symbol-display").innerHTML=
-`<i class="fa-solid ${icon}"></i>`;
-
-};
-
-container.appendChild(button);
-
-});
-
-}
-
-
-/* =========================================================
-   TEXT
-========================================================= */
-
-function updateText(field){
-
-const input=document.getElementById("input-"+field);
-
-const preview=document.getElementById("preview-"+field);
-
-if(input && preview){
-
-saveHistory(false);
-
-preview.innerText=input.value;
-
-}
-
-}
-
-
-/* =========================================================
-   FONT
-========================================================= */
-
-function changeFont(font){
-
-saveHistory();
-
-document.getElementById("report-cover").style.fontFamily=font;
-
-}
-
-
-function changeFontSize(size){
-
-const title=document.getElementById("preview-title");
-
-title.style.fontSize=size+"px";
-
-document.getElementById("title-size").value=size;
-
-}
-
-
-function setFontWeight(weight){
-
-saveHistory();
-
-document.getElementById("preview-title").style.fontWeight=weight;
-
-}
-
-
-/* =========================================================
-   FRAME
-========================================================= */
-
-function changeFrame(type){
-
-saveHistory();
-
-const cover=document.getElementById("report-cover");
-
-cover.classList.remove(
-"frame-double",
-"frame-royal",
-"frame-dashed",
-"frame-gold",
-"frame-blue",
-"frame-purple",
-"frame-red",
-"frame-cyan",
-"frame-black",
-"frame-bronze",
-"frame-inner",
-"frame-triple"
-);
-
-cover.classList.add("frame-"+type);
-
-}
-
-
-/* =========================================================
-   FRAME CSS
-========================================================= */
-
-const frameStyle=document.createElement("style");
-
-frameStyle.innerHTML=`
-
-.frame-double{
-border:5px double #059669!important;
-}
-
-.frame-royal{
-border:9px double #334155!important;
-outline:2px solid #10b981;
-outline-offset:-15px;
-}
-
-.frame-dashed{
-border:4px dashed #10b981!important;
-}
-
-.frame-gold{
-border:5px solid #d97706!important;
-}
-
-.frame-blue{
-border:7px double #2563eb!important;
-}
-
-.frame-purple{
-border:5px solid #9333ea!important;
-}
-
-.frame-red{
-border:5px solid #991b1b!important;
-}
-
-.frame-cyan{
-border:5px solid #06b6d4!important;
-}
-
-.frame-black{
-border:8px solid #111827!important;
-}
-
-.frame-bronze{
-border:6px ridge #b45309!important;
-}
-
-.frame-inner{
-border:4px solid #059669!important;
-outline:2px solid #064e3b;
-outline-offset:-12px;
-}
-
-.frame-triple{
-border:3px solid #059669!important;
-outline:3px double #d97706;
-outline-offset:-10px;
-}
-
-`;
-
-document.head.appendChild(frameStyle);
-
-
-/* =========================================================
-   COLORS
-========================================================= */
-
-function changeTextColor(color){
-
-saveHistory();
-
-const cover=document.getElementById("report-cover");
-
-cover.style.color=color;
-
-cover.querySelectorAll("h1,h2,h3,strong").forEach(el=>{
-el.style.color=color;
-});
-
-}
-
-
-function changeBgColor(color){
-
-saveHistory();
-
-document.getElementById("report-cover").style.background=color;
-
-}
-
-
-function setBackground(background){
-
-saveHistory();
-
-const cover=document.getElementById("report-cover");
-
-cover.style.background=background;
-
-}
-
-
-function togglePattern(enabled){
-
-const cover=document.getElementById("report-cover");
-
-cover.classList.toggle("cover-pattern",enabled);
-
-}
-
-
-/* =========================================================
-   LOGOS
-========================================================= */
-
-function uploadLogo(event,position){
-
-const file=event.target.files[0];
-
-if(!file)return;
-
-if(!file.type.startsWith("image/")){
-
-alert("الملف يجب أن يكون صورة");
-
-return;
-
-}
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-saveHistory();
-
-const img=document.getElementById("img-"+position);
-
-img.src=e.target.result;
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-
-function removeLogo(position){
-
-saveHistory();
-
-document.getElementById("img-"+position).src="";
-
-}
-
-
-function toggleLogo(position,show){
-
-document.getElementById(
-"logo-"+position+"-container"
-).style.display=show?"flex":"none";
-
-}
-
-
-function changeLogoSize(size){
-
-const px=size+"px";
-
-["right","left"].forEach(position=>{
-
-const img=document.getElementById("img-"+position);
-
-img.style.width=px;
-img.style.height=px;
-img.style.maxWidth=px;
-img.style.maxHeight=px;
-
-});
-
-}
-
-
-/* =========================================================
-   TITLE
-========================================================= */
-
-function setTitleAlign(align){
-
-saveHistory();
-
-document.getElementById("preview-title").style.textAlign=align;
-
-}
-
-
-function updateDescription(){
-
-document.getElementById("preview-description").innerText=
-document.getElementById("description-input").value;
-
-}
-
-
-/* =========================================================
-   WATERMARK
-========================================================= */
-
-function updateWatermark(){
-
-document.getElementById("watermark").innerText=
-document.getElementById("watermark-input").value;
-
-}
-
-
-/* =========================================================
-   ORIENTATION
-========================================================= */
-
-function setOrientation(type){
-
-saveHistory();
-
-const cover=document.getElementById("report-cover");
-
-if(type==="landscape"){
-
-cover.classList.add("cover-landscape");
-
-}else{
-
-cover.classList.remove("cover-landscape");
-
-}
-
-}
-
-
-/* =========================================================
-   ZOOM
-========================================================= */
-
-let zoom=1;
-
-function applyZoom(){
-
-const cover=document.getElementById("report-cover");
-
-cover.style.transform=
-`scale(${zoom})`;
-
-document.getElementById("zoomValue").innerText=
-Math.round(zoom*100)+"%";
-
-}
-
-
-function zoomIn(){
-
-zoom=Math.min(1.5,zoom+.1);
-
-applyZoom();
-
-}
-
-
-function zoomOut(){
-
-zoom=Math.max(.4,zoom-.1);
-
-applyZoom();
-
-}
-
-
-function resetZoom(){
-
-zoom=1;
-
-applyZoom();
-
-}
-
-
-/* =========================================================
-   SAVE DESIGN
-========================================================= */
-
-function getDesignData(){
-
-return {
-
-university:document.getElementById("input-university").value,
-college:document.getElementById("input-college").value,
-title:document.getElementById("input-title").value,
-author:document.getElementById("input-author").value,
-supervisor:document.getElementById("input-supervisor").value,
-year:document.getElementById("input-year").value,
-date:document.getElementById("input-date").value,
-stage:document.getElementById("input-stage").value,
-section:document.getElementById("input-section").value,
-number:document.getElementById("input-number").value,
-specialty:document.getElementById("input-specialty").value,
-
-font:
-document.getElementById("report-cover").style.fontFamily,
-
-background:
-document.getElementById("report-cover").style.background,
-
-textColor:
-document.getElementById("report-cover").style.color,
-
-titleSize:
-document.getElementById("preview-title").style.fontSize,
-
-titleWeight:
-document.getElementById("preview-title").style.fontWeight,
-
-titleAlign:
-document.getElementById("preview-title").style.textAlign,
-
-description:
-document.getElementById("description-input").value,
-
-watermark:
-document.getElementById("watermark-input").value,
-
-logoRight:
-document.getElementById("img-right").src,
-
-logoLeft:
-document.getElementById("img-left").src,
-
-symbol:
-document.getElementById("selected-symbol-display").innerHTML,
-
-zoom:zoom
-
-};
-
-}
-
-
-function saveDesign(){
-
-try{
-
-localStorage.setItem(
-"reportStudioDesign",
-JSON.stringify(getDesignData())
-);
-
-alert("تم حفظ التصميم بنجاح ✅");
-
-}catch(error){
-
-alert("تعذر حفظ التصميم. ربما حجم الصور كبير جداً.");
-
-}
-
-}
-
-
-/* =========================================================
-   LOAD
-========================================================= */
-
-function loadDesign(){
-
-const saved=localStorage.getItem("reportStudioDesign");
-
-if(!saved){
-
-alert("لا يوجد تصميم محفوظ");
-
-return;
-
-}
-
-try{
-
-const d=JSON.parse(saved);
-
-document.getElementById("input-university").value=d.university;
-document.getElementById("input-college").value=d.college;
-document.getElementById("input-title").value=d.title;
-document.getElementById("input-author").value=d.author;
-document.getElementById("input-supervisor").value=d.supervisor;
-document.getElementById("input-year").value=d.year;
-document.getElementById("input-date").value=d.date;
-document.getElementById("input-stage").value=d.stage;
-document.getElementById("input-section").value=d.section;
-document.getElementById("input-number").value=d.number;
-document.getElementById("input-specialty").value=d.specialty;
-
-[
-"university",
-"college",
-"title",
-"author",
-"supervisor",
-"year",
-"date",
-"stage",
-"section",
-"number"
-].forEach(field=>{
-
-const el=document.getElementById("preview-"+field);
-
-if(el)el.innerText=d[field];
-
-});
-
-document.getElementById("report-cover").style.fontFamily=d.font;
-document.getElementById("report-cover").style.background=d.background;
-document.getElementById("report-cover").style.color=d.textColor;
-
-document.getElementById("preview-title").style.fontSize=d.titleSize;
-document.getElementById("preview-title").style.fontWeight=d.titleWeight;
-document.getElementById("preview-title").style.textAlign=d.titleAlign;
-
-document.getElementById("description-input").value=d.description;
-document.getElementById("preview-description").innerText=d.description;
-
-document.getElementById("watermark-input").value=d.watermark;
-document.getElementById("watermark").innerText=d.watermark;
-
-document.getElementById("img-right").src=d.logoRight;
-document.getElementById("img-left").src=d.logoLeft;
-
-document.getElementById("selected-symbol-display").innerHTML=d.symbol;
-
-zoom=d.zoom||1;
-
-applyZoom();
-
-alert("تم استرجاع التصميم ✅");
-
-}catch(error){
-
-console.error(error);
-
-alert("حدث خطأ أثناء استرجاع التصميم");
-
-}
-
-}
-
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-let history=[];
-
-function saveHistory(){
-
-try{
-
-const state=getDesignData();
-
-history.push(JSON.stringify(state));
-
-if(history.length>20){
-
-history.shift();
-
-}
-
-}catch(e){}
-
-}
-
-
-function undoChange(){
-
-if(history.length===0){
-
-alert("لا توجد تغييرات للتراجع");
-
-return;
-
-}
-
-const previous=JSON.parse(history.pop());
-
-applyHistory(previous);
-
-}
-
-
-function applyHistory(d){
-
-document.getElementById("input-university").value=d.university;
-document.getElementById("input-college").value=d.college;
-document.getElementById("input-title").value=d.title;
-document.getElementById("input-author").value=d.author;
-document.getElementById("input-supervisor").value=d.supervisor;
-document.getElementById("input-year").value=d.year;
-document.getElementById("input-date").value=d.date;
-document.getElementById("input-stage").value=d.stage;
-document.getElementById("input-section").value=d.section;
-document.getElementById("input-number").value=d.number;
-
-Object.keys({
-university:1,
-college:1,
-title:1,
-author:1,
-supervisor:1,
-year:1,
-date:1,
-stage:1,
-section:1,
-number:1
-}).forEach(field=>{
-
-const p=document.getElementById("preview-"+field);
-
-if(p)p.innerText=d[field];
-
-});
-
-document.getElementById("report-cover").style.fontFamily=d.font;
-document.getElementById("report-cover").style.background=d.background;
-document.getElementById("report-cover").style.color=d.textColor;
-
-document.getElementById("preview-title").style.fontSize=d.titleSize;
-document.getElementById("preview-title").style.fontWeight=d.titleWeight;
-document.getElementById("preview-title").style.textAlign=d.titleAlign;
-
-document.getElementById("description-input").value=d.description;
-document.getElementById("preview-description").innerText=d.description;
-
-document.getElementById("watermark-input").value=d.watermark;
-document.getElementById("watermark").innerText=d.watermark;
-
-document.getElementById("img-right").src=d.logoRight;
-document.getElementById("img-left").src=d.logoLeft;
-
-document.getElementById("selected-symbol-display").innerHTML=d.symbol;
-
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-function resetDesign(){
-
-if(!confirm("هل تريد إعادة التصميم إلى الوضع الافتراضي؟"))return;
-
-saveHistory();
-
-location.reload();
-
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-function showLoading(text){
-
-document.getElementById("loading-text").innerText=text;
-
-document.getElementById("loading-overlay").style.display="flex";
-
-}
-
-
-function hideLoading(){
-
-document.getElementById("loading-overlay").style.display="none";
-
-}
-
-
-/* =========================================================
-   SAFE FILENAME
-========================================================= */
-
-function safeFileName(name){
-
-return name
-.replace(/[\\\/:*?"<>|]/g,"")
-.replace(/\s+/g," ")
-.trim()
-.substring(0,100)
-||"report_cover";
-
-}
-
-
-/* =========================================================
-   PNG EXPORT
-========================================================= */
-
-async function exportImage(){
-
-const element=document.getElementById("report-cover");
-
-if(!element){
-
-alert("لم يتم العثور على الغلاف");
-
-return;
-
-}
-
-showLoading("جاري إنشاء صورة PNG عالية الجودة...");
-
-try{
-
-await document.fonts.ready;
-
-await waitForImages(element);
-
-const oldTransform=element.style.transform;
-
-element.style.transform="none";
-
-const canvas=await html2canvas(element,{
-
-scale:3,
-
-useCORS:true,
-
-allowTaint:false,
-
-backgroundColor:null,
-
-logging:false,
-
-imageTimeout:20000
-
-});
-
-element.style.transform=oldTransform;
-
-canvas.toBlob(blob=>{
-
-if(!blob){
-
-hideLoading();
-
-alert("تعذر إنشاء الصورة");
-
-return;
-
-}
-
-const url=URL.createObjectURL(blob);
-
-const link=document.createElement("a");
-
-const title=
-document.getElementById("input-title").value;
-
-link.href=url;
-
-link.download=
-safeFileName(title)+".png";
-
-document.body.appendChild(link);
-
-link.click();
-
-link.remove();
-
-setTimeout(()=>{
-URL.revokeObjectURL(url);
-},1500);
-
-hideLoading();
-
-}, "image/png");
-
-}catch(error){
-
-console.error(error);
-
-hideLoading();
-
-alert(
-"تعذر تحميل الصورة.\n\nإذا كان هناك شعار من الإنترنت، ارفعه من جهازك ثم حاول مرة أخرى."
-);
-
-}
-
-}
-
-
-/* =========================================================
-   WAIT IMAGES
-========================================================= */
-
-function waitForImages(container){
-
-const images=Array.from(
-container.querySelectorAll("img")
-);
-
-return Promise.all(
-
-images.map(img=>{
-
-if(img.complete)return Promise.resolve();
-
-return new Promise(resolve=>{
-
-img.onload=resolve;
-img.onerror=resolve;
-
-setTimeout(resolve,10000);
-
-});
-
-})
-
-);
-
-}
-
-
-/* =========================================================
-   PDF EXPORT
-========================================================= */
-
-async function exportPDF(){
-
-const element=document.getElementById("report-cover");
-
-if(!element){
-
-alert("لم يتم العثور على الغلاف");
-
-return;
-
-}
-
-showLoading("جاري إنشاء ملف PDF A4...");
-
-try{
-
-await document.fonts.ready;
-
-await waitForImages(element);
-
-const oldTransform=element.style.transform;
-
-element.style.transform="none";
-
-const title=
-safeFileName(
-document.getElementById("input-title").value
-);
-
-const isLandscape=
-element.classList.contains("cover-landscape");
-
-const options={
-
-margin:0,
-
-filename:title+".pdf",
-
-image:{
-type:"jpeg",
-quality:1
-},
-
-html2canvas:{
-
-scale:3,
-
-useCORS:true,
-
-allowTaint:false,
-
-backgroundColor:"#ffffff",
-
-logging:false,
-
-imageTimeout:20000
-
-},
-
-jsPDF:{
-
-unit:"mm",
-
-format:"a4",
-
-orientation:isLandscape?
-"landscape":
-"portrait"
-
-}
-
-};
-
-await html2pdf()
-.set(options)
-.from(element)
-.save();
-
-element.style.transform=oldTransform;
-
-hideLoading();
-
-}catch(error){
-
-console.error(error);
-
-hideLoading();
-
-alert(
-"حدث خطأ أثناء إنشاء PDF.\n\nإذا كان هناك شعار خارجي، ارفعه من جهازك ثم أعد المحاولة."
-);
-
-}
-
-}
-
-
-/* =========================================================
-   WORD EXPORT
-========================================================= */
-
-async function exportWord(){
-
-try{
-
-showLoading("جاري إنشاء ملف Word...");
-
-const d=getDesignData();
-
-const doc=new docx.Document({
-
-sections:[{
-
-properties:{
-
-page:{
-size:{
-width:11906,
-height:16838
-}
-}
-
-},
-
-children:[
-
-new docx.Paragraph({
-
-text:d.university,
-
-alignment:docx.AlignmentType.CENTER,
-
-heading:docx.HeadingLevel.HEADING_2
-
-}),
-
-new docx.Paragraph({
-
-text:d.college,
-
-alignment:docx.AlignmentType.CENTER
-
-}),
-
-new docx.Paragraph({
-
-text:""
-
-}),
-
-new docx.Paragraph({
-
-text:d.title,
-
-alignment:docx.AlignmentType.CENTER,
-
-heading:docx.HeadingLevel.HEADING_1
-
-}),
-
-new docx.Paragraph({
-
-text:d.description,
-
-alignment:docx.AlignmentType.CENTER
-
-}),
-
-new docx.Paragraph({
-
-text:""
-
-}),
-
-new docx.Paragraph({
-
-text:"إعداد الطالب: "+d.author,
-
-alignment:docx.AlignmentType.RIGHT
-
-}),
-
-new docx.Paragraph({
-
-text:"إشراف الأستاذ: "+d.supervisor,
-
-alignment:docx.AlignmentType.LEFT
-
-}),
-
-new docx.Paragraph({
-
-text:"المرحلة: "+d.stage+
-"    |    الشعبة: "+d.section,
-
-alignment:docx.AlignmentType.CENTER
-
-}),
-
-new docx.Paragraph({
-
-text:"رقم التقرير: "+d.number,
-
-alignment:docx.AlignmentType.CENTER
-
-}),
-
-new docx.Paragraph({
-
-text:"العام الدراسي: "+d.year,
-
-alignment:docx.AlignmentType.CENTER
-
-}),
-
-new docx.Paragraph({
-
-text:"التاريخ: "+d.date,
-
-alignment:docx.AlignmentType.CENTER
-
-})
-
-]
-
-}]
-
-});
-
-const blob=
-await docx.Packer.toBlob(doc);
-
-saveAs(
-blob,
-safeFileName(d.title)+".docx"
-);
-
-hideLoading();
-
-}catch(error){
-
-console.error(error);
-
-hideLoading();
-
-alert("تعذر إنشاء ملف Word");
-
-}
-
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-function printReport(){
-
-const cover=document.getElementById("report-cover");
-
-const printArea=document.getElementById("print-area");
-
-printArea.innerHTML="";
-
-const clone=cover.cloneNode(true);
-
-clone.style.transform="none";
-
-printArea.appendChild(clone);
-
-window.print();
-
-}
-
-
-/* =========================================================
-   KEYBOARD SHORTCUTS
-========================================================= */
-
-document.addEventListener("keydown",function(e){
-
-if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="s"){
-
-e.preventDefault();
-
-saveDesign();
-
-}
-
-if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="z"){
-
-e.preventDefault();
-
-undoChange();
-
-}
-
-});
-
-
-/* =========================================================
-   AUTO SAVE
-========================================================= */
-
-setInterval(()=>{
-
-try{
-
-localStorage.setItem(
-"reportStudioAutoSave",
-JSON.stringify(getDesignData())
-);
-
-}catch(e){}
-
-},30000);
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-document.addEventListener("DOMContentLoaded",function(){
-
-initSymbols();
-
-changeLogoSize(96);
-
-applyZoom();
-
-});
-
-</script>
-
+<body class="text-slate-900 min-h-screen flex flex-col justify-between selection:bg-indigo-600 selection:text-white">
+
+    <!-- شاشة اختيار تسجيل الدخول -->
+    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 backdrop-blur-md p-4">
+        <div class="glass-card w-full max-w-md p-8 rounded-3xl shadow-2xl border border-slate-100 text-center transform transition-all">
+            <div class="inline-flex bg-indigo-600 text-white p-4 rounded-2xl shadow-lg shadow-indigo-500/30 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+            <h2 class="text-2xl font-black text-slate-800 mb-1">نظام الإدارة فقط</h2>
+            <p class="text-xs font-bold text-indigo-600 mb-6 bg-indigo-50 py-1.5 px-3 rounded-full inline-block border border-indigo-100">تمت برمجة هذا الموقع بواسطة عبد الرحمن وليد هاشم</p>
+
+            <div class="space-y-4">
+                <button onclick="openAdminLogin()" class="w-full bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg shadow-indigo-600/35 transition-all flex items-center justify-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    تسجيل دخول المدير المشفر
+                </button>
+                <button onclick="openUserQuery()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-600/35 transition-all flex items-center justify-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    بحث في قاعدة البيانات فقط
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة كلمة سر المدير -->
+    <div id="adminPasswordModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 backdrop-blur-md p-4">
+        <div class="glass-card w-full max-w-sm p-6 rounded-3xl shadow-2xl text-center">
+            <h3 class="text-lg font-bold text-slate-800 mb-2">أدخل رمز دخول المدير</h3>
+            <p id="adminAttemptsText" class="text-xs text-rose-500 font-semibold mb-3">المحاولات المتبقية: 3</p>
+            <input type="password" id="adminPin" placeholder="رمز المرور..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-center tracking-widest">
+            <div class="flex gap-2">
+                <button id="adminLoginBtn" onclick="verifyAdmin()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow">دخول</button>
+                <button onclick="closeModals()" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 rounded-xl">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تعديل الدين (خاصة بالمدير) -->
+    <div id="editDebtModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 backdrop-blur-md p-4">
+        <div class="glass-card w-full max-w-md p-6 rounded-3xl shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-slate-800">تعديل سجل الدين</h3>
+                <button onclick="closeEditModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            </div>
+            <input type="hidden" id="editDocId">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1">اسم الشخص الثلاثي</label>
+                    <input type="text" id="editPersonName" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1">نوع الدين</label>
+                    <input type="text" id="editDebtType" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1">المبلغ الكلي</label>
+                    <input type="number" id="editTotalAmount" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1">المبلغ الواصل</label>
+                    <input type="number" id="editPaidAmount" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button onclick="saveEditedDebt()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow">حفظ التعديلات</button>
+                    <button onclick="closeEditModal()" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 rounded-xl">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة استعلام المستخدم -->
+    <div id="userQueryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 backdrop-blur-md p-4">
+        <div class="glass-card w-full max-w-md p-6 rounded-3xl shadow-2xl">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-lg font-bold text-slate-800">بحث في قاعدة البيانات فقط</h3>
+                <button onclick="closeModals()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            </div>
+            <p class="text-xs text-emerald-600 font-semibold mb-3">أدخل الاسم الثلاثي للبحث فقط</p>
+            <input type="text" id="queryFullName" placeholder="أدخل الاسم الثلاثي هنا..." class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 mb-4 text-sm">
+            <button id="userSearchBtn" onclick="searchUserDebt()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md mb-4">بحث</button>
+            
+            <div id="queryResultContainer" class="hidden p-4 rounded-xl text-sm"></div>
+        </div>
+    </div>
+
+    <!-- رأس الصفحة الرئيسي -->
+    <header class="glass-card shadow-sm border-b border-slate-200/60 sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3.5 flex justify-between items-center max-w-6xl">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-indigo-600 to-violet-600 text-white p-2.5 rounded-2xl shadow-md shadow-indigo-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-lg font-black text-slate-800 tracking-tight">نظام إدارة الديون الإلكتروني</h1>
+                    <p class="text-xs text-slate-500">مُؤمّن بأعلى تقنيات الحماية السيبرانية 2027</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-200">جلسة آمنة (Secure Session)</span>
+                <button onclick="location.reload()" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-3 py-1.5 rounded-xl transition">إنهاء الجلسة</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي للمدير -->
+    <main id="adminMainContent" class="container mx-auto px-4 py-8 max-w-6xl flex-grow hidden">
+        
+        <!-- نموذج الإدخال -->
+        <section class="glass-card p-6 sm:p-8 rounded-3xl shadow-xl border border-white mb-8">
+            <div class="flex items-center gap-2 mb-6 border-b border-slate-100 pb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="text-xl font-bold text-slate-800">إضافة سجل دين جديد (مدقق أمنياً)</h2>
+            </div>
+
+            <form id="debtForm" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1.5">اسم الشخص الثلاثي</label>
+                    <input type="text" id="personName" required placeholder="أدخل الاسم الثلاثي للمدين..." class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1.5">نوع الدين</label>
+                    <input type="text" id="debtType" required placeholder="مثلاً: بضاعة، مواد، سلفة..." class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1.5">المبلغ الكلي (IQD)</label>
+                    <input type="number" id="totalAmount" required placeholder="0" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1.5">المبلغ الواصل (IQD)</label>
+                    <input type="number" id="paidAmount" required placeholder="0" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition">
+                </div>
+                <div class="md:col-span-2 bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100 flex justify-between items-center">
+                    <span class="text-sm font-bold text-indigo-900">المبلغ المتبقي (يُحسب تلقائياً):</span>
+                    <span id="calculatedRemaining" class="text-xl font-black text-rose-600 font-mono">0 IQD</span>
+                </div>
+                <div class="md:col-span-2 flex flex-wrap gap-3.5 pt-2">
+                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-bold px-6 py-3.5 rounded-2xl shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        حفظ آمن في قاعدة البيانات
+                    </button>
+                    <button type="button" id="exportExcel" class="bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold px-6 py-3.5 rounded-2xl shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        تصدير إلى Excel
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- جدول السجلات -->
+        <section class="glass-card p-6 sm:p-8 rounded-3xl shadow-xl border border-white">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 border-b border-slate-100 pb-4 gap-4">
+                <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <h2 class="text-xl font-bold text-slate-800">سجلات الديون المشفرة</h2>
+                </div>
+                <div class="w-full sm:w-72">
+                    <input type="text" id="searchInput" placeholder="بحث سريع آمن..." class="w-full px-4 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border border-slate-100">
+                <table class="w-full border-collapse text-right">
+                    <thead>
+                        <tr class="bg-slate-100/90 text-slate-700 text-xs uppercase tracking-wider font-bold">
+                            <th class="p-4">اسم الشخص الثلاثي</th>
+                            <th class="p-4">نوع الدين</th>
+                            <th class="p-4">المبلغ الكلي</th>
+                            <th class="p-4">الواصل</th>
+                            <th class="p-4">المتبقي</th>
+                            <th class="p-4 text-center">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="debtsTableBody" class="divide-y divide-slate-100 text-sm text-slate-600"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر الرسمي -->
+    <footer class="bg-slate-900 text-slate-300 text-center py-5 mt-12 border-t border-slate-800">
+        <p class="text-sm font-medium">تمت برمجة هذا النظام بواسطة <span class="text-white font-bold">عبد الرحمن وليد هاشم</span></p>
+    </footer>
+
+    <!-- Firebase & Enterprise Security Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-EnterpriseSecure2027",
+            authDomain: "myappa-46b04.firebaseapp.com",
+            projectId: "myappa-46b04",
+            storageBucket: "myappa-46b04.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123:web:abc"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let allFetchedDebts = [];
+        const MAX_ATTEMPTS = 3;
+
+        function getSecureStorage(key, defaultVal) {
+            try {
+                const val = localStorage.getItem(key);
+                return val ? parseInt(val) : defaultVal;
+            } catch (e) {
+                return defaultVal;
+            }
+        }
+
+        function setSecureStorage(key, val) {
+            try {
+                localStorage.setItem(key, val);
+            } catch (e) {}
+        }
+
+        let adminFailedAttempts = getSecureStorage('secure_admin_fails', 0);
+
+        if (adminFailedAttempts >= MAX_ATTEMPTS) {
+            lockAdminSystem();
+        } else {
+            document.getElementById('adminAttemptsText').textContent = `المحاولات المتبقية: ${MAX_ATTEMPTS - adminFailedAttempts}`;
+        }
+
+        const totalInput = document.getElementById('totalAmount');
+        const paidInput = document.getElementById('paidAmount');
+        const remainingSpan = document.getElementById('calculatedRemaining');
+
+        function updateRemaining() {
+            const total = Math.max(0, parseFloat(totalInput.value) || 0);
+            const paid = Math.max(0, parseFloat(paidInput.value) || 0);
+            const rem = Math.max(0, total - paid);
+            remainingSpan.textContent = rem.toLocaleString() + " IQD";
+        }
+
+        totalInput.addEventListener('input', updateRemaining);
+        paidInput.addEventListener('input', updateRemaining);
+
+        const form = document.getElementById('debtForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const personName = sanitizeStrict(document.getElementById('personName').value);
+            const debtType = sanitizeStrict(document.getElementById('debtType').value);
+            const totalAmount = parseFloat(totalInput.value) || 0;
+            const paidAmount = parseFloat(paidInput.value) || 0;
+            const remainingBalance = Math.max(0, totalAmount - paidAmount);
+
+            if (!personName || !debtType) {
+                alert("يرجى إدخال بيانات صالحة خالية من الرموز الممنوعة.");
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "debts_secure_2027"), {
+                    personName,
+                    debtType,
+                    totalAmount,
+                    paidAmount,
+                    remainingBalance,
+                    createdAt: serverTimestamp()
+                });
+                form.reset();
+                remainingSpan.textContent = "0 IQD";
+                alert("تم حفظ سجل الدين بنجاح في قاعدة البيانات المشفرة!");
+            } catch (error) {
+                console.error("خطأ في الحفظ:", error);
+                alert("حدث خطأ أثناء الاتصال بقاعدة البيانات الآمنة.");
+            }
+        });
+
+        function sanitizeStrict(str) {
+            return str.replace(/[<>]/g, "").trim().substring(0, 100);
+        }
+
+        const tableBody = document.getElementById('debtsTableBody');
+        onSnapshot(collection(db, "debts_secure_2027"), (snapshot) => {
+            allFetchedDebts = [];
+            snapshot.forEach((doc) => {
+                allFetchedDebts.push({ id: doc.id, ...doc.data() });
+            });
+            renderTable(allFetchedDebts);
+        }, (error) => {
+            console.error("خطأ في المزامنة:", error);
+        });
+
+        function renderTable(dataArray) {
+            tableBody.innerHTML = "";
+            if (dataArray.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">لا توجد سجلات مسجلة حالياً.</td></tr>`;
+                return;
+            }
+            dataArray.forEach((data) => {
+                const row = `
+                    <tr class="hover:bg-indigo-50/30 transition-colors">
+                        <td class="p-4 font-semibold text-slate-800">${escapeHtml(data.personName || '')}</td>
+                        <td class="p-4"><span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg text-xs font-semibold">${escapeHtml(data.debtType || '')}</span></td>
+                        <td class="p-4 font-mono">${Number(data.totalAmount || 0).toLocaleString()} IQD</td>
+                        <td class="p-4 font-mono text-emerald-600">${Number(data.paidAmount || 0).toLocaleString()} IQD</td>
+                        <td class="p-4 font-mono font-bold text-rose-600">${Number(data.remainingBalance || 0).toLocaleString()} IQD</td>
+                        <td class="p-4 text-center space-x-2 space-x-reverse">
+                            <button onclick="openEditModal('${data.id}', '${escapeHtml(data.personName)}', '${escapeHtml(data.debtType)}', ${data.totalAmount}, ${data.paidAmount})" class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow">تعديل</button>
+                            <button onclick="deleteDebt('${data.id}')" class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow">حذف</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = sanitizeStrict(e.target.value.toLowerCase());
+            const filtered = allFetchedDebts.filter(item => 
+                (item.personName || '').toLowerCase().includes(query) || 
+                (item.debtType || '').toLowerCase().includes(query)
+            );
+            renderTable(filtered);
+        });
+
+        document.getElementById('exportExcel').addEventListener('click', () => {
+            const table = document.querySelector("table");
+            const wb = XLSX.utils.table_to_book(table, { sheet: "debts_secure_2027" });
+            XLSX.writeFile(wb, "سجلات_الديون_المشفرة.xlsx");
+        });
+
+        window.openAdminLogin = function() {
+            if (adminFailedAttempts >= MAX_ATTEMPTS) {
+                alert("⚠️ تم تفعيل نظام الحظر الأمني المؤقت لحماية لوحة المدير.");
+                return;
+            }
+            document.getElementById('adminPasswordModal').classList.remove('hidden');
+        }
+
+        window.openUserQuery = function() {
+            document.getElementById('userQueryModal').classList.remove('hidden');
+        }
+
+        window.closeModals = function() {
+            document.getElementById('adminPasswordModal').classList.add('hidden');
+            document.getElementById('userQueryModal').classList.add('hidden');
+            document.getElementById('editDebtModal').classList.add('hidden');
+        }
+
+        window.closeEditModal = function() {
+            document.getElementById('editDebtModal').classList.add('hidden');
+        }
+
+        // فتح نافذة التعديل وتعبئة البيانات القديمة
+        window.openEditModal = function(id, name, type, total, paid) {
+            document.getElementById('editDocId').value = id;
+            document.getElementById('editPersonName').value = name;
+            document.getElementById('editDebtType').value = type;
+            document.getElementById('editTotalAmount').value = total;
+            document.getElementById('editPaidAmount').value = paid;
+            document.getElementById('editDebtModal').classList.remove('hidden');
+        }
+
+        // حفظ التعديلات في قاعدة البيانات
+        window.saveEditedDebt = async function() {
+            const id = document.getElementById('editDocId').value;
+            const personName = sanitizeStrict(document.getElementById('editPersonName').value);
+            const debtType = sanitizeStrict(document.getElementById('editDebtType').value);
+            const totalAmount = parseFloat(document.getElementById('editTotalAmount').value) || 0;
+            const paidAmount = parseFloat(document.getElementById('editPaidAmount').value) || 0;
+            const remainingBalance = Math.max(0, totalAmount - paidAmount);
+
+            if (!personName || !debtType) {
+                alert("يرجى إدخال بيانات صحيحة.");
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "debts_secure_2027", id);
+                await updateDoc(docRef, {
+                    personName,
+                    debtType,
+                    totalAmount,
+                    paidAmount,
+                    remainingBalance
+                });
+                closeEditModal();
+                alert("تم تحديث وتعديل سجل الدين بنجاح!");
+            } catch (error) {
+                console.error("خطأ في التعديل:", error);
+                alert("حدث خطأ أثناء تعديل البيانات.");
+            }
+        }
+
+        // حذف السجل
+        window.deleteDebt = async function(id) {
+            if (confirm("هل أنت متأكد من رغبتك في حذف هذا السجل نهائياً؟")) {
+                try {
+                    await deleteDoc(doc(db, "debts_secure_2027", id));
+                    alert("تم حذف السجل بنجاح.");
+                } catch (error) {
+                    console.error("خطأ في الحذف:", error);
+                    alert("حدث خطأ أثناء محاولة الحذف.");
+                }
+            }
+        }
+
+        window.verifyAdmin = function() {
+            if (adminFailedAttempts >= MAX_ATTEMPTS) return;
+
+            const pin = document.getElementById('adminPin').value;
+            if (pin === "qwer4312") {
+                setSecureStorage('secure_admin_fails', 0);
+                closeModals();
+                document.getElementById('authModal').classList.add('hidden');
+                document.getElementById('adminMainContent').classList.remove('hidden');
+            } else {
+                adminFailedAttempts++;
+                setSecureStorage('secure_admin_fails', adminFailedAttempts);
+                const remaining = MAX_ATTEMPTS - adminFailedAttempts;
+                
+                if (adminFailedAttempts >= MAX_ATTEMPTS) {
+                    lockAdminSystem();
+                } else {
+                    document.getElementById('adminAttemptsText').textContent = `المحاولات المتبقية: ${remaining}`;
+                    alert(`رمز الدخول خاطئ! المحاولات المتبقية: ${remaining}`);
+                }
+            }
+        }
+
+        function lockAdminSystem() {
+            const inputField = document.getElementById('adminPin');
+            const btn = document.getElementById('adminLoginBtn');
+            if(inputField) inputField.disabled = true;
+            if(btn) {
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            document.getElementById('adminAttemptsText').textContent = "⚠️ تم حظر لوحة المدير بسبب محاولات دخول غير مصرح بها.";
+            alert("⚠️ تم حظر النظام أمنياً.");
+        }
+
+        window.searchUserDebt = function() {
+            const nameQuery = sanitizeStrict(document.getElementById('queryFullName').value.toLowerCase());
+            const resContainer = document.getElementById('queryResultContainer');
+            resContainer.classList.remove('hidden');
+
+            if (!nameQuery) {
+                resContainer.className = "p-4 rounded-xl text-sm bg-amber-50 text-amber-800 border border-amber-200";
+                resContainer.innerHTML = "يرجى إدخال الاسم الثلاثي للبحث.";
+                return;
+            }
+
+            const foundUser = allFetchedDebts.find(item => (item.personName || '').toLowerCase().includes(nameQuery));
+
+            if (foundUser) {
+                resContainer.className = "p-4 rounded-xl text-sm bg-rose-50 text-rose-900 border border-rose-200 space-y-2";
+                resContainer.innerHTML = `
+                    <p class="font-bold text-base">⚠️ عذراً، يوجد دين مسجل بهذا الاسم:</p>
+                    <hr class="border-rose-200">
+                    <p><b>الاسم الكامل:</b> ${escapeHtml(foundUser.personName)}</p>
+                    <p><b>نوع الدين:</b> ${escapeHtml(foundUser.debtType)}</p>
+                    <p><b>المبلغ الكلي:</b> ${Number(foundUser.totalAmount).toLocaleString()} IQD</p>
+                    <p><b>المبلغ الواصل:</b> ${Number(foundUser.paidAmount || 0).toLocaleString()} IQD</p>
+                    <p class="font-bold text-rose-600"><b>المبلغ المتبقي:</b> ${Number(foundUser.remainingBalance).toLocaleString()} IQD</p>
+                `;
+            } else {
+                resContainer.className = "p-4 rounded-xl text-sm bg-emerald-50 text-emerald-900 border border-emerald-200";
+                resContainer.innerHTML = `✅ ممتاز! لا توجد أي ديون مسجلة بهذا الاسم في قاعدة البيانات.`;
+            }
+        }
+    </script>
 </body>
 </html>
