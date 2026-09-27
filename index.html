@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام إدارة ومتابعة الديون - 2027 Enterprise Secure Edition</title>
+    <title>نظام الإدارة - 2027 Enterprise Secure Edition</title>
     <!-- Tailwind CSS 2027 Ultra Design System -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@450;600;700;900&display=swap" rel="stylesheet">
-    <!-- SheetJS for Excel Export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- SheetJS with Style support for Excel Export Formatting -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -33,7 +33,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
             </div>
-            <h2 class="text-2xl font-black text-slate-800 mb-1">نظام الإدارة فقط</h2>
+            <h2 class="text-2xl font-black text-slate-800 mb-1">نظام الإدارة</h2>
             <p class="text-xs font-bold text-indigo-600 mb-6 bg-indigo-50 py-1.5 px-3 rounded-full inline-block border border-indigo-100">تمت برمجة هذا الموقع بواسطة عبد الرحمن وليد هاشم</p>
 
             <div class="space-y-4">
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <!-- نافذة تعديل الدين (خاصة بالمدير) -->
+    <!-- نافذة تعديل الدين -->
     <div id="editDebtModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 backdrop-blur-md p-4">
         <div class="glass-card w-full max-w-md p-6 rounded-3xl shadow-2xl">
             <div class="flex justify-between items-center mb-4">
@@ -99,6 +99,27 @@
         </div>
     </div>
 
+    <!-- نافذة إضافة مبلغ سريع لشخص محدد -->
+    <div id="quickAddModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 backdrop-blur-md p-4">
+        <div class="glass-card w-full max-w-sm p-6 rounded-3xl shadow-2xl">
+            <h3 class="text-lg font-bold text-slate-800 mb-1">إضافة / تحديث مبلغ</h3>
+            <p id="quickAddNameLabel" class="text-xs text-indigo-600 font-semibold mb-4"></p>
+            <input type="hidden" id="quickAddDocId">
+            <input type="hidden" id="quickAddCurrentTotal">
+            <input type="hidden" id="quickAddCurrentPaid">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1">المبلغ المراد إضافته (IQD)</label>
+                    <input type="number" id="quickAddAmountInput" placeholder="أدخل المبلغ..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="saveQuickAddAmount()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow">إضافة للمبلغ</button>
+                    <button onclick="closeQuickAddModal()" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 rounded-xl">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- نافذة استعلام المستخدم -->
     <div id="userQueryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 backdrop-blur-md p-4">
         <div class="glass-card w-full max-w-md p-6 rounded-3xl shadow-2xl">
@@ -124,7 +145,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-lg font-black text-slate-800 tracking-tight">نظام إدارة الديون الإلكتروني</h1>
+                    <h1 class="text-lg font-black text-slate-800 tracking-tight">نظام الإدارة الإلكتروني</h1>
                     <p class="text-xs text-slate-500">مُؤمّن بأعلى تقنيات الحماية السيبرانية 2027</p>
                 </div>
             </div>
@@ -179,10 +200,65 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
-                        تصدير إلى Excel
+                        تصدير إلى Excel (منسق بالكامل)
                     </button>
                 </div>
             </form>
+        </section>
+
+        <!-- قسم استيراد الأسماء من صورة أو ملف نصي (بدون مبالغ) -->
+        <section class="glass-card p-6 sm:p-8 rounded-3xl shadow-xl border border-white mb-8">
+            <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h2 class="text-xl font-bold text-slate-800">استيراد قائمة أسماء (من ملف نصي/صورة) بدون مبالغ</h2>
+            </div>
+            <p class="text-xs text-slate-500 mb-4">الصق الأسماء هنا أو ارفع ملف نصي/قائمة PDF (كل اسم في سطر), وسيقوم النظام بإضافتهم جميعاً إلى القائمة بمبلغ (0) لتقوم بتعديلهم لاحقاً.</p>
+            
+            <div class="space-y-4">
+                <textarea id="bulkNamesInput" rows="4" placeholder="انسخ والصق قائمة الأسماء هنا (كل اسم في سطر منفصل)..." class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"></textarea>
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" onclick="importNamesOnly()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-2xl shadow transition flex items-center gap-2">
+                        استيراد وإضافة الأسماء دفعة واحدة
+                    </button>
+                    <label class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-6 rounded-2xl cursor-pointer transition flex items-center gap-2 text-sm">
+                        <span>رفع ملف نصي (TXT)</span>
+                        <input type="file" id="textFileLoader" accept=".txt,.csv" class="hidden" onchange="loadTextFile(event)">
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم إضافة دين شامل لجميع الأسماء مع إمكانية التخصيص الفردي -->
+        <section class="glass-card p-6 sm:p-8 rounded-3xl shadow-xl border border-white mb-8">
+            <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <h2 class="text-xl font-bold text-slate-800">إضافة دين شامل للجميع مع استثناءات مخصصة</h2>
+            </div>
+            <p class="text-xs text-slate-500 mb-4">أدخل نوع الدين والمبلغ العام للجميع, وإذا كان هناك أشخاص محددون بمبلغ مختلف (مثل عاصم 5000), اكتبهم في خانة الاستثناءات بالشكل: <code class="bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-mono">الاسم:المبلغ</code> (كل استثناء في سطر).</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1.5">نوع الدين الشامل</label>
+                    <input type="text" id="bulkDebtType" placeholder="مثلاً: مساويات، قسط..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1.5">المبلغ العام لبقية الأسماء (IQD)</label>
+                    <input type="number" id="bulkAmount" placeholder="20000" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm">
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-slate-600 mb-1.5">الاستثناءات الخاصة (اختياري - كل اسم ومبلغه في سطر):</label>
+                <textarea id="bulkExceptions" rows="2" placeholder="عاصم:5000&#10;محمد علي:10000" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-mono"></textarea>
+            </div>
+
+            <button type="button" onclick="applyBulkDebt()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-xl shadow transition flex items-center justify-center gap-2">
+                تطبيق الدين الشامل مع الاستثناءات الآن
+            </button>
         </section>
 
         <!-- جدول السجلات -->
@@ -197,6 +273,16 @@
                 <div class="w-full sm:w-72">
                     <input type="text" id="searchInput" placeholder="بحث سريع آمن..." class="w-full px-4 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                 </div>
+            </div>
+
+            <!-- شريط التصنيف حسب الحرف الأبجدي -->
+            <div class="mb-6 bg-slate-50/80 p-3 rounded-2xl border border-slate-200 flex flex-wrap gap-1.5 items-center justify-center">
+                <span class="text-xs font-bold text-slate-500 ml-2">فلترة بالحرف:</span>
+                <button onclick="filterByLetter('')" class="px-3 py-1 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow transition" id="letter_all">الكل</button>
+                <script>
+                    const arabicLetters = ['أ','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','هـ','و','ي'];
+                    document.write(arabicLetters.map(l => `<button onclick="filterByLetter('${l}')" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-indigo-50 text-slate-700 border border-slate-200 transition" id="letter_${l}">${l}</button>`).join(''));
+                </script>
             </div>
 
             <div class="overflow-x-auto rounded-2xl border border-slate-100">
@@ -240,6 +326,7 @@
         const db = getFirestore(app);
 
         let allFetchedDebts = [];
+        let currentSelectedLetter = '';
         const MAX_ATTEMPTS = 3;
 
         function getSecureStorage(key, defaultVal) {
@@ -321,28 +408,52 @@
             snapshot.forEach((doc) => {
                 allFetchedDebts.push({ id: doc.id, ...doc.data() });
             });
-            renderTable(allFetchedDebts);
+            applyCurrentFilter();
         }, (error) => {
             console.error("خطأ في المزامنة:", error);
         });
 
+        window.filterByLetter = function(letter) {
+            currentSelectedLetter = letter;
+            document.querySelectorAll('[id^="letter_"]').forEach(btn => {
+                btn.className = "px-2.5 py-1 rounded-lg text-xs font-bold bg-white hover:bg-indigo-50 text-slate-700 border border-slate-200 transition";
+            });
+            const activeBtn = document.getElementById(letter === '' ? 'letter_all' : `letter_${letter}`);
+            if(activeBtn) {
+                activeBtn.className = "px-3 py-1 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow transition";
+            }
+            applyCurrentFilter();
+        }
+
+        function applyCurrentFilter() {
+            let filtered = allFetchedDebts;
+            if (currentSelectedLetter !== '') {
+                filtered = filtered.filter(item => {
+                    const name = (item.personName || '').trim();
+                    return name.startsWith(currentSelectedLetter);
+                });
+            }
+            renderTable(filtered);
+        }
+
         function renderTable(dataArray) {
             tableBody.innerHTML = "";
             if (dataArray.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">لا توجد سجلات مسجلة حالياً.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">لا توجد سجلات مسجلة مطابقة للبحث أو الحرف.</td></tr>`;
                 return;
             }
             dataArray.forEach((data) => {
                 const row = `
                     <tr class="hover:bg-indigo-50/30 transition-colors">
                         <td class="p-4 font-semibold text-slate-800">${escapeHtml(data.personName || '')}</td>
-                        <td class="p-4"><span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg text-xs font-semibold">${escapeHtml(data.debtType || '')}</span></td>
+                        <td class="p-4"><span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg text-xs font-semibold">${escapeHtml(data.debtType || 'بدون تحديد')}</span></td>
                         <td class="p-4 font-mono">${Number(data.totalAmount || 0).toLocaleString()} IQD</td>
                         <td class="p-4 font-mono text-emerald-600">${Number(data.paidAmount || 0).toLocaleString()} IQD</td>
                         <td class="p-4 font-mono font-bold text-rose-600">${Number(data.remainingBalance || 0).toLocaleString()} IQD</td>
-                        <td class="p-4 text-center space-x-2 space-x-reverse">
-                            <button onclick="openEditModal('${data.id}', '${escapeHtml(data.personName)}', '${escapeHtml(data.debtType)}', ${data.totalAmount}, ${data.paidAmount})" class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow">تعديل</button>
-                            <button onclick="deleteDebt('${data.id}')" class="bg-rose-500 hover:bg-rose-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow">حذف</button>
+                        <td class="p-4 text-center space-x-1.5 space-x-reverse">
+                            <button onclick="openQuickAddModal('${data.id}', '${escapeHtml(data.personName)}', ${data.totalAmount || 0}, ${data.paidAmount || 0})" class="bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1.5 rounded-xl text-xs font-bold transition shadow" title="إضافة مبلغ سريع">+ مبلغ</button>
+                            <button onclick="openEditModal('${data.id}', '${escapeHtml(data.personName)}', '${escapeHtml(data.debtType || '')}', ${data.totalAmount || 0}, ${data.paidAmount || 0})" class="bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-xl text-xs font-bold transition shadow">تعديل</button>
+                            <button onclick="deleteDebt('${data.id}')" class="bg-rose-500 hover:bg-rose-600 text-white px-2.5 py-1.5 rounded-xl text-xs font-bold transition shadow">حذف</button>
                         </td>
                     </tr>
                 `;
@@ -351,7 +462,7 @@
         }
 
         function escapeHtml(text) {
-            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            return (text || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
 
         const searchInput = document.getElementById('searchInput');
@@ -364,11 +475,206 @@
             renderTable(filtered);
         });
 
+        // دالة التصدير الاحترافية إلى إكسل مع التنسيق والتظليل وتعديل المقاسات تلقائياً
         document.getElementById('exportExcel').addEventListener('click', () => {
-            const table = document.querySelector("table");
-            const wb = XLSX.utils.table_to_book(table, { sheet: "debts_secure_2027" });
-            XLSX.writeFile(wb, "سجلات_الديون_المشفرة.xlsx");
+            if (allFetchedDebts.length === 0) {
+                alert("لا توجد بيانات لتصديرها.");
+                return;
+            }
+
+            // تجهيز البيانات بالترتيب المطلوب (الاسم الثلاثي، نوع الدين، المبلغ الكلي، الواصل، المتبقي)
+            const excelData = [
+                ["اسم الشخص الثلاثي", "نوع الدين", "المبلغ الكلي", "الواصل", "المتبقي"]
+            ];
+
+            allFetchedDebts.forEach(item => {
+                excelData.push([
+                    item.personName || '',
+                    item.debtType || '',
+                    Number(item.totalAmount || 0),
+                    Number(item.paidAmount || 0),
+                    Number(item.remainingBalance || 0)
+                ]);
+            });
+
+            const ws = XLSX.utils.aoa_to_sheet(excelData);
+
+            // تفعيل اتجاه الورقة من اليمين لليسار (RTL) في إكسل
+            if(!ws['!views']) ws['!views'] = [];
+            ws['!views'].push({ RTL: true });
+
+            // تعريف أنماط التصميم والتظليل (رمادي/رصاصي)
+            const headerStyle = {
+                font: { name: "Cairo", sz: 12, bold: true, color: { rgb: "FFFFFF" } },
+                fill: { fgColor: { rgb: "334155" } }, // رصاصي غامق للرأس
+                alignment: { horizontal: "center", vertical: "center" }
+            };
+
+            const cellNameStyle = {
+                font: { name: "Cairo", sz: 11, bold: true, color: { rgb: "0F172A" } },
+                fill: { fgColor: { rgb: "E2E8F0" } }, // تظليل رمادي/رصاصي فاتح للاسم الثلاثي
+                alignment: { horizontal: "right", vertical: "center" }
+            };
+
+            const cellTypeStyle = {
+                font: { name: "Cairo", sz: 11, color: { rgb: "334155" } },
+                fill: { fgColor: { rgb: "F1F5F9" } }, // تظليل رمادي خفيف لعمود نوع الدين
+                alignment: { horizontal: "center", vertical: "center" }
+            };
+
+            const cellAmountStyle = {
+                font: { name: "Cairo", sz: 11, bold: true, color: { rgb: "0F172A" } },
+                fill: { fgColor: { rgb: "F1F5F9" } }, // تظليل رمادي خفيف جداً للمبالغ والمتبقي
+                alignment: { horizontal: "center", vertical: "center" },
+                numFmt: "#,##0"
+            };
+
+            // تطبيق التنسيقات على الخلايا وتحديد أبعاد الأعمدة حسب الحجم التلقائي
+            const colWidths = [
+                { wch: 30 }, // اسم الشخص الثلاثي (واسع ليظهر الاسم كاملاً)
+                { wch: 18 }, // نوع الدين
+                { wch: 16 }, // المبلغ الكلي
+                { wch: 16 }, // الواصل
+                { wch: 16 }  // المتبقي
+            ];
+            ws['!cols'] = colWidths;
+
+            const range = XLSX.utils.decode_range(ws['!ref']);
+            for (let R = range.s.r; R <= range.e.r; ++R) {
+                for (let C = range.s.c; C <= range.e.c; ++C) {
+                    const cellAddress = XLSX.utils.encode_cell({ r: R, c: C });
+                    if (!ws[cellAddress]) continue;
+
+                    if (R === 0) {
+                        ws[cellAddress].s = headerStyle;
+                    } else {
+                        if (C === 0) {
+                            ws[cellAddress].s = cellNameStyle; // تظليل الاسم الثلاثي
+                        } else if (C === 1) {
+                            ws[cellAddress].s = cellTypeStyle; // تظليل نوع الدين بنفس النمط المتناسق
+                        } else if (C === 2 || C === 3 || C === 4) {
+                            ws[cellAddress].s = cellAmountStyle; // تظليل المبالغ والمتبقي
+                        } else {
+                            ws[cellAddress].s = cellTypeStyle;
+                        }
+                    }
+                }
+            }
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "سجلات الديون");
+            XLSX.writeFile(wb, "سجلات_الديون_المنسقة.xlsx");
         });
+
+        // استيراد الأسماء فقط
+        window.importNamesOnly = async function() {
+            const textContent = document.getElementById('bulkNamesInput').value;
+            if (!textContent.trim()) {
+                alert("يرجى إدخال أو لصق قائمة الأسماء أولاً.");
+                return;
+            }
+
+            const namesList = textContent.split('\n').map(name => sanitizeStrict(name)).filter(name => name.length > 0);
+
+            if (namesList.length === 0) {
+                alert("لم يتم العثور على أسماء صالحة.");
+                return;
+            }
+
+            if (!confirm(`هل أنت متأكد من استيراد وإضافة (${namesList.length}) اسماً إلى القائمة بدون مبالغ؟`)) {
+                return;
+            }
+
+            try {
+                for (let name of namesList) {
+                    await addDoc(collection(db, "debts_secure_2027"), {
+                        personName: name,
+                        debtType: "قائمة مستوردة",
+                        totalAmount: 0,
+                        paidAmount: 0,
+                        remainingBalance: 0,
+                        createdAt: serverTimestamp()
+                    });
+                }
+                document.getElementById('bulkNamesInput').value = '';
+                alert("تم استيراد وإضافة جميع الأسماء بنجاح!");
+            } catch (error) {
+                console.error("خطأ في الاستيراد:", error);
+                alert("حدث خطأ أثناء استيراد الأسماء.");
+            }
+        };
+
+        window.loadTextFile = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('bulkNamesInput').value = e.target.result;
+            };
+            reader.readAsText(file);
+        };
+
+        window.applyBulkDebt = async function() {
+            const bulkType = sanitizeStrict(document.getElementById('bulkDebtType').value);
+            const defaultAmount = parseFloat(document.getElementById('bulkAmount').value) || 0;
+            const exceptionsText = document.getElementById('bulkExceptions').value;
+
+            if (!bulkType) {
+                alert("يرجى إدخال نوع الدين الشامل.");
+                return;
+            }
+
+            if (allFetchedDebts.length === 0) {
+                alert("لا توجد أسماء مسجلة في القائمة حالياً.");
+                return;
+            }
+
+            const exceptionMap = {};
+            if (exceptionsText.trim()) {
+                const lines = exceptionsText.split('\n');
+                for (let line of lines) {
+                    const parts = line.split(':');
+                    if (parts.length === 2) {
+                        const nameKey = sanitizeStrict(parts[0]).toLowerCase();
+                        const amountVal = parseFloat(parts[1]) || 0;
+                        exceptionMap[nameKey] = amountVal;
+                    }
+                }
+            }
+
+            if (!confirm(`هل أنت متأكد من تطبيق الدين الشامل (${bulkType}) على جميع الأسماء (${allFetchedDebts.length} شخص)؟`)) {
+                return;
+            }
+
+            try {
+                for (let item of allFetchedDebts) {
+                    const docRef = doc(db, "debts_secure_2027", item.id);
+                    const currentNameLower = (item.personName || '').trim().toLowerCase();
+                    
+                    let addAmount = defaultAmount;
+                    if (exceptionMap[currentNameLower] !== undefined) {
+                        addAmount = exceptionMap[currentNameLower];
+                    }
+
+                    const newTotal = (parseFloat(item.totalAmount) || 0) + addAmount;
+                    const paid = parseFloat(item.paidAmount) || 0;
+                    const newRemaining = Math.max(0, newTotal - paid);
+
+                    await updateDoc(docRef, {
+                        debtType: bulkType,
+                        totalAmount: newTotal,
+                        remainingBalance: newRemaining
+                    });
+                }
+                document.getElementById('bulkDebtType').value = '';
+                document.getElementById('bulkAmount').value = '';
+                document.getElementById('bulkExceptions').value = '';
+                alert("تم تطبيق الدين الشامل والاستثناءات على الأسماء بنجاح!");
+            } catch (error) {
+                console.error("خطأ في التحديث الشامل:", error);
+                alert("حدث خطأ أثناء تطبيق الدين الشامل.");
+            }
+        }
 
         window.openAdminLogin = function() {
             if (adminFailedAttempts >= MAX_ATTEMPTS) {
@@ -386,13 +692,17 @@
             document.getElementById('adminPasswordModal').classList.add('hidden');
             document.getElementById('userQueryModal').classList.add('hidden');
             document.getElementById('editDebtModal').classList.add('hidden');
+            document.getElementById('quickAddModal').classList.add('hidden');
         }
 
         window.closeEditModal = function() {
             document.getElementById('editDebtModal').classList.add('hidden');
         }
 
-        // فتح نافذة التعديل وتعبئة البيانات القديمة
+        window.closeQuickAddModal = function() {
+            document.getElementById('quickAddModal').classList.add('hidden');
+        }
+
         window.openEditModal = function(id, name, type, total, paid) {
             document.getElementById('editDocId').value = id;
             document.getElementById('editPersonName').value = name;
@@ -402,7 +712,43 @@
             document.getElementById('editDebtModal').classList.remove('hidden');
         }
 
-        // حفظ التعديلات في قاعدة البيانات
+        window.openQuickAddModal = function(id, name, total, paid) {
+            document.getElementById('quickAddDocId').value = id;
+            document.getElementById('quickAddNameLabel').textContent = `الشخص: ${name}`;
+            document.getElementById('quickAddCurrentTotal').value = total;
+            document.getElementById('quickAddCurrentPaid').value = paid;
+            document.getElementById('quickAddAmountInput').value = '';
+            document.getElementById('quickAddModal').classList.remove('hidden');
+        }
+
+        window.saveQuickAddAmount = async function() {
+            const id = document.getElementById('quickAddDocId').value;
+            const currentTotal = parseFloat(document.getElementById('quickAddCurrentTotal').value) || 0;
+            const currentPaid = parseFloat(document.getElementById('quickAddCurrentPaid').value) || 0;
+            const addVal = parseFloat(document.getElementById('quickAddAmountInput').value) || 0;
+
+            if (addVal <= 0) {
+                alert("يرجى إدخال مبلغ صالح.");
+                return;
+            }
+
+            const newTotal = currentTotal + addVal;
+            const newRemaining = Math.max(0, newTotal - currentPaid);
+
+            try {
+                const docRef = doc(db, "debts_secure_2027", id);
+                await updateDoc(docRef, {
+                    totalAmount: newTotal,
+                    remainingBalance: newRemaining
+                });
+                closeQuickAddModal();
+                alert("تم إضافة المبلغ وتحديث الحساب بنجاح!");
+            } catch (error) {
+                console.error("خطأ في الإضافة السريعة:", error);
+                alert("حدث خطأ أثناء تحديث المبلغ.");
+            }
+        }
+
         window.saveEditedDebt = async function() {
             const id = document.getElementById('editDocId').value;
             const personName = sanitizeStrict(document.getElementById('editPersonName').value);
@@ -433,7 +779,6 @@
             }
         }
 
-        // حذف السجل
         window.deleteDebt = async function(id) {
             if (confirm("هل أنت متأكد من رغبتك في حذف هذا السجل نهائياً؟")) {
                 try {
@@ -500,10 +845,10 @@
                     <p class="font-bold text-base">⚠️ عذراً، يوجد دين مسجل بهذا الاسم:</p>
                     <hr class="border-rose-200">
                     <p><b>الاسم الكامل:</b> ${escapeHtml(foundUser.personName)}</p>
-                    <p><b>نوع الدين:</b> ${escapeHtml(foundUser.debtType)}</p>
-                    <p><b>المبلغ الكلي:</b> ${Number(foundUser.totalAmount).toLocaleString()} IQD</p>
+                    <p><b>نوع الدين:</b> ${escapeHtml(foundUser.debtType || 'بدون تحديد')}</p>
+                    <p><b>المبلغ الكلي:</b> ${Number(foundUser.totalAmount || 0).toLocaleString()} IQD</p>
                     <p><b>المبلغ الواصل:</b> ${Number(foundUser.paidAmount || 0).toLocaleString()} IQD</p>
-                    <p class="font-bold text-rose-600"><b>المبلغ المتبقي:</b> ${Number(foundUser.remainingBalance).toLocaleString()} IQD</p>
+                    <p class="font-bold text-rose-600"><b>المبلغ المتبقي:</b> ${Number(foundUser.remainingBalance || 0).toLocaleString()} IQD</p>
                 `;
             } else {
                 resContainer.className = "p-4 rounded-xl text-sm bg-emerald-50 text-emerald-900 border border-emerald-200";
