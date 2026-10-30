@@ -256,10 +256,6 @@ body{font-family:'Cairo',sans-serif;background:var(--gray-light);color:var(--bla
         </div>
         <button class="buy-now-btn" onclick="buyNowFromModal()"><i class="fas fa-bolt"></i> اشترِ الآن</button>
         <button class="add-to-cart" style="width:100%; margin-bottom:20px;" onclick="addToCartFromModal()">أضف للسلة</button>
-        
-        <!-- زر الواتساب للاستفسار عن المنتج -->
-        <a id="waProductBtn" href="#" target="_blank" style="display:block; text-align:center; background:#25d366; color:white; padding:10px; border-radius:10px; text-decoration:none; margin-bottom:20px; font-weight:bold;"><i class="fab fa-whatsapp"></i> استفسر عن هذا المنتج عبر واتساب</a>
-        
         <h4>التقييمات:</h4>
         <div id="reviewsList" style="margin-top:10px; margin-bottom:15px;"></div>
         <form id="reviewForm" class="hidden" onsubmit="submitReview(event)">
@@ -334,8 +330,7 @@ body{font-family:'Cairo',sans-serif;background:var(--gray-light);color:var(--bla
 </div>
 
 <div class="toast" id="toast"></div>
-<!-- زر الواتساب العائم برقمك الجديد -->
-<a href="https://wa.me/9647725372995" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+<a href="https://wa.me/9647700000000" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
 <footer style="text-align:center; padding:30px; background:var(--purple-dark); color:white;"><strong>يساعدكم</strong> © 2026</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -373,6 +368,7 @@ function setUser(user) {
     const nav = document.getElementById('navActions');
     if (user) {
         const username = user.user_metadata?.username || 'مستخدم';
+        // تم تحديث إيميل المدير هنا
         const isAdmin = user.email === '2004oopp202326@gmail.com';
         nav.innerHTML = `<button class="nav-btn" onclick="showPage('profile')"><i class="fas fa-user"></i> ${username}</button>
                          ${isAdmin ? `<button class="nav-btn nav-btn-login" onclick="showPage('admin')"><i class="fas fa-cog"></i> الإدارة</button>` : ''}
@@ -540,10 +536,6 @@ async function openProduct(id) {
     let priceText = `${Number(p.price).toLocaleString('ar-IQ')} د.ع`;
     if(p.discount > 0) { let fp = Number(p.price) - (Number(p.price) * (p.discount / 100)); priceText = `<span class="old-price">${Number(p.price).toLocaleString('ar-IQ')}</span> ${fp.toLocaleString('ar-IQ')} د.ع`; }
     document.getElementById('modalPrice').innerHTML = priceText;
-    
-    // تحديث رابط الواتساب الخاص بالمنتج برقمك الجديد
-    document.getElementById('waProductBtn').href = `https://wa.me/9647725372995?text=مرحباً، أريد الاستفسار عن هذا المنتج: ${p.name}`;
-
     document.getElementById('productModal').classList.add('active');
     document.getElementById('reviewForm').classList.toggle('hidden', !currentUser);
     document.getElementById('reviewsList').innerHTML = 'جاري التحميل...';
@@ -656,4 +648,8 @@ function renderAdminOrders() {
         } else {
             actions = `<span style="color:var(--green); font-size:0.8rem;">مكتمل</span>`;
         }
-        return `<div class="order-card"><div class="order-header"><span>#${o.id}</span><span>${o.total.toLocaleString()}</span></div><div class="order-details"><div>${o.customer_name} - ${o.customer_ph
+        return `<div class="order-card"><div class="order-header"><span>#${o.id}</span><span>${o.total.toLocaleString()}</span></div><div class="order-details"><div>${o.customer_name} - ${o.customer_phone}</div><div>${o.customer_address}</div></div><div class="order-actions">${actions}</div></div>`;
+    }).join('');
+}
+async function updateOrderStatus(id, s) { await db.from('orders').update({ status: s }).eq('id', id); showToast('تم تحديث الطلب'); loadAdminData(); }
+function openEditProduct(id) { const p = allProducts.find(x => x.id === id); document.getElementById('editPId').value = p.id; document.getElementById('editPName').value = p.name; document.getElementById('editPPrice').value = p.price; document.getElementById('editPDiscount').value = p.dis
